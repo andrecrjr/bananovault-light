@@ -1,3 +1,14 @@
+
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+@import "./components/menu.css";
+
+@import "./components/button.css";
+
 :root{
     --background-color:#2A292E;
 }
@@ -11,12 +22,3 @@ body{
 #root{
     height:100%;
 }
-
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "./components/menu.css";
-
-
-@import "tailwindcss/utilities";
