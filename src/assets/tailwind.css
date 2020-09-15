@@ -22,3 +22,7 @@ body{
 #root{
     height:100%;
 }
+
+.structure{
+    @apply shadow-xl p-8 flex mx-auto flex-col grid-flow-row;
+}
