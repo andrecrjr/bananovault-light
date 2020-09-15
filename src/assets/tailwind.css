@@ -1,0 +1,22 @@
+:root{
+    --background-color:#2A292E;
+}
+body{
+    background:var(--background-color);
+    font-family: 'NowAltRegular';
+   font-weight: normal;
+   font-style: normal;
+}
+
+#root{
+    height:100%;
+}
+
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "./components/menu.css";
+
+
+@import "tailwindcss/utilities";

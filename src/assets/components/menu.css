@@ -1,0 +1,6 @@
+.header__menu--item{
+    padding-top:15px;
+}
+.header__menu--item:not(:first-child){
+    padding-left:20px;
+}
