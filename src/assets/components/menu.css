@@ -1,7 +1,22 @@
+
 .header__menu--item{
     padding-top:15px;
+    @apply text-xs;
 }
 .header__menu--item:not(:first-child){
-    padding-left:20px;
+    @apply pl-6;    
+}
+
+@Media screen and (min-width:768px){
+ 
+    .header__menu--item:not(:first-child){
+        @apply pl-3;   
+    }
+}
+
+@Media screen and (min-width:980px){
     
+    .header__menu--item{
+        @apply text-sm;
+    }
 }

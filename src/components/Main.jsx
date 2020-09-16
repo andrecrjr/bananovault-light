@@ -3,7 +3,7 @@ import Layout from "./Layout";
 function Main() {
   return (
     <Layout>
-      <section className="flex flex-col">
+      <section className="structure md:mx-auto lg:w-8/12">
         <div className="flex flex-col items-center sm:flex-row">
           <button className="button--main">Criar Wallet</button>
           <button className="button--main mt-5 sm:mt-0 sm:ml-2">

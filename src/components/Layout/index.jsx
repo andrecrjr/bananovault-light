@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <>
       <Header />
-      <main className="w-full">{children}</main>
+      <main className="w-full mt-4 sm:mt-10">{children}</main>
     </>
   );
 }

@@ -1,0 +1,4 @@
+
+table tbody tr:nth-child(even){
+    background-color: #4c4a53;
+}
