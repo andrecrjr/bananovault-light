@@ -14,7 +14,7 @@ function Accounts() {
               alt="banano-account"
             />
           </span>
-          <h1 className="flex sm:w-1/3 text-xs md:text-sm align-center mb-4 sm:mb-0 text-gray-600 items-center break-all">
+          <h1 className="flex sm:w-1/3 text-sm align-center mb-4 sm:mb-0 text-gray-600 items-center break-all">
             ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
           </h1>
         </div>
