@@ -1,0 +1,25 @@
+
+.structure{
+    @apply shadow-struct flex mx-auto flex-col;
+}
+
+.structure--title{
+    @apply mt-16 text-center text-xl pb-4 text-gray-600 uppercase ;
+}
+
+
+@media screen and (min-width:768px){
+    .structure{
+        @apply w-9/12;
+    }
+    .structure--title{
+        @apply text-2xl;
+    }
+}
+
+
+@media screen and (min-width:1280px){
+    .structure{
+        @apply w-7/12;
+    }
+}

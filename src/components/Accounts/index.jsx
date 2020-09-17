@@ -1,75 +1,48 @@
 import React from "react";
 import Layout from "../Layout";
-
-function Accounts() {
+import { Link } from "react-router-dom";
+function ListAccounts() {
   return (
-    <Layout>
-      
-      <h1 className="structure--title">Account Balance</h1> 
-      <div className="structure pt-2 sm:grid text-white p-8 ">
-        <div className="flex flex-col sm:flex-row">
-          <span>
-            <img
-              src="https://monkey.banano.cc/api/v1/monkey/ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke?format=png&size=250"
-              className="w-54 mx-auto"
-              alt="banano-account"
-            />
-          </span>
-          <h1 className="flex sm:w-1/3 text-xs md:text-sm align-center mb-4 sm:mb-0 text-gray-600 items-center break-all">
-            ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
-          </h1>
-        </div>
-        <div className="flex flex-row justify-evenly sm:flex-col items-end">
-          <div className="flex flex-col font-thin">
-            <p> Balance:</p>
-            <p className="w-auto align-end">0 BAN</p>
-          </div>
-          <div className="flex flex-col font-thin">
-            <p> Pending:</p>
-            <p className="w-auto align-end">0 BAN</p>
-          </div>
-        </div>
-        <p className="w-auto break-all text-gray-700 text-sm col-span-2">
-          Representative:
-          ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
-        </p>
-      </div>
-      <TableTransactions />      
-    </Layout>
+    <>
+      <Layout>
+        <h1 className="structure--title">Your Accounts</h1>
+        <section className="structure  pt-5">
+          <button className="w-5/12 md:w-3/12 block ml-auto mr-3 text-2xs button--main">
+            Create New Account
+          </button>
+          <table class="table-auto rounded-lg">
+            <thead>
+              <tr>
+              <td className="text-right text-white uppercase pl-2">Index</td>
+                <td className="text-center text-white uppercase">
+                  Address
+                </td>
+                <td className="text-center text-white py-4 uppercase pl-2">
+                  Balance
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <td className="table-child--left text-xl text-white">
+                  1
+                </td>
+                <td className="table-child px-2 text-sm text-white">
+                  <Link to="/account/number">
+                    ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+                  </Link>
+                </td>
+                <td className="table-child--left mx-0 md:pr-4 text-white">
+                  2000 BAN
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </Layout>
+    </>
   );
 }
 
-const TableTransactions = () =>{
-  return (
-    <>
-    <h1 className="structure--title">Recent Transactions</h1> 
-    <div className="structure md:w-9/12 sm:grid text-white mb-10">
-      <table class="table-auto rounded-lg">
-          <thead>
-            <tr className="bg-weak-gray">
-              <th className="text-left py-4 px-10 uppercase ">Account</th>
-              <th className="text-right uppercase pr-5 md:pr-10">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="break-all text-xs w-8/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+15.0 BAN</td>
-            </tr>
-            <tr>
-              <td className="break-all text-xs w-9/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+15.0 BAN</td>
-            </tr>
-            <tr>
-              <td className="break-all text-xs w-9/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+100000.0 BAN</td>
-            </tr>
-          </tbody>
-      </table>
-
-    </div>
-    </>
-  )
-}
-
-export default Accounts;
+export default ListAccounts;

@@ -2,3 +2,17 @@
 table tbody tr:nth-child(even){
     background-color: #4c4a53;
 }
+
+.table-child{
+    @apply break-all text-xs w-8/12 py-4 px-10;
+}
+
+.table-child--left{
+    @apply text-right pr-5 text-2xs;
+}
+
+@media screen and (min-width:768px){
+    .table-child--left{
+        @apply pr-10;
+    }
+}

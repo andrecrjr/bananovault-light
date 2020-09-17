@@ -644,6 +644,63 @@ table tbody tr:nth-child(even){
   background-color: #4c4a53;
 }
 
+.table-child{
+  word-break: break-all;
+  font-size: 0.75rem;
+  width: 66.666667%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.table-child--left{
+  text-align: right;
+  padding-right: 1.25rem;
+  font-size: 0.60rem;
+}
+
+@media screen and (min-width:768px){
+  .table-child--left{
+    padding-right: 2.5rem;
+  }
+}
+
+.structure{
+  box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+}
+
+.structure--title{
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 1.25rem;
+  padding-bottom: 1rem;
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+  text-transform: uppercase;
+}
+
+@media screen and (min-width:768px){
+  .structure{
+    width: 75%;
+  }
+
+  .structure--title{
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width:1280px){
+  .structure{
+    width: 58.333333%;
+  }
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
@@ -13885,7 +13942,7 @@ table tbody tr:nth-child(even){
 }
 
 .shadow-struct {
-  box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
 }
 
 .hover\:shadow-xs:hover {
@@ -13929,7 +13986,7 @@ table tbody tr:nth-child(even){
 }
 
 .hover\:shadow-struct:hover {
-  box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
 }
 
 .focus\:shadow-xs:focus {
@@ -13973,7 +14030,7 @@ table tbody tr:nth-child(even){
 }
 
 .focus\:shadow-struct:focus {
-  box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
 }
 
 .fill-current {
@@ -18886,41 +18943,6 @@ body{
 
 #root{
   height:100%;
-}
-
-.structure{
-  box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  flex-direction: column;
-}
-
-.structure--title{
-  margin-top: 4rem;
-  text-align: center;
-  font-size: 1.25rem;
-  padding-bottom: 1rem;
-  --text-opacity: 1;
-  color: #718096;
-  color: rgba(113, 128, 150, var(--text-opacity));
-  text-transform: uppercase;
-}
-
-@media screen and (min-width:768px){
-  .structure{
-    width: 75%;
-  }
-
-  .structure--title{
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (min-width:1280px){
-  .structure{
-    width: 58.333333%;
-  }
 }
 
 @media (min-width: 640px) {
@@ -32193,7 +32215,7 @@ body{
   }
 
   .sm\:shadow-struct {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .sm\:hover\:shadow-xs:hover {
@@ -32237,7 +32259,7 @@ body{
   }
 
   .sm\:hover\:shadow-struct:hover {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .sm\:focus\:shadow-xs:focus {
@@ -32281,7 +32303,7 @@ body{
   }
 
   .sm\:focus\:shadow-struct:focus {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .sm\:fill-current {
@@ -50421,7 +50443,7 @@ body{
   }
 
   .md\:shadow-struct {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .md\:hover\:shadow-xs:hover {
@@ -50465,7 +50487,7 @@ body{
   }
 
   .md\:hover\:shadow-struct:hover {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .md\:focus\:shadow-xs:focus {
@@ -50509,7 +50531,7 @@ body{
   }
 
   .md\:focus\:shadow-struct:focus {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .md\:fill-current {
@@ -68649,7 +68671,7 @@ body{
   }
 
   .lg\:shadow-struct {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .lg\:hover\:shadow-xs:hover {
@@ -68693,7 +68715,7 @@ body{
   }
 
   .lg\:hover\:shadow-struct:hover {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .lg\:focus\:shadow-xs:focus {
@@ -68737,7 +68759,7 @@ body{
   }
 
   .lg\:focus\:shadow-struct:focus {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .lg\:fill-current {
@@ -86877,7 +86899,7 @@ body{
   }
 
   .xl\:shadow-struct {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .xl\:hover\:shadow-xs:hover {
@@ -86921,7 +86943,7 @@ body{
   }
 
   .xl\:hover\:shadow-struct:hover {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .xl\:focus\:shadow-xs:focus {
@@ -86965,7 +86987,7 @@ body{
   }
 
   .xl\:focus\:shadow-struct:focus {
-    box-shadow: -1px 13px 12px 13px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 9px 12px 17px rgba(0, 0, 0, 0.1), 0 10px 9px 5px rgba(0, 0, 0, 0.04);
   }
 
   .xl\:fill-current {
