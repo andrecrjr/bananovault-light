@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainRoute from "./routes/Main";
 import AccountRoutes from "./routes/Accounts";
 import ListAccountsRoutes from "./routes/ListAccounts";
+import Send from "./routes/Send";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       </Route>
       <Route path="/account/:bananoaccount">
         <AccountRoutes />
+      </Route>
+      <Route path="/send">
+        <Send />
       </Route>
     </Router>
   );
