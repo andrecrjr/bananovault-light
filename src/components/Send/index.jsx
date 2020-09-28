@@ -10,7 +10,7 @@ function Send() {
           <label className="text-white text-center ">From account:</label>
           <select
             name="banano-address"
-            className="w-5/12 h-8 mx-auto rounded-sm  mt-2"
+            className="w-8/12 h-8 mx-auto rounded-sm  mt-2"
             id="banano"
           >
             <option className="text-center">ban_1eroshi...66e3ke</option>
@@ -22,11 +22,11 @@ function Send() {
             type="text"
             id="to-account"
             placeholder="Account to send to"
-            className="w-5/12 p-2 mx-auto rounded-sm mt-2"
+            className="w-8/12 p-2 mx-auto rounded-sm mt-2"
           />
         </div>
         <label className="pt-3 text-white text-center">Amount</label>
-        <div className="relative text-xs w-6/12 mx-auto mt-2">
+        <div className="relative text-xs w-8/12 mx-auto mt-2">
           <input
             type="number"
             placeholder="Amount of Banano"

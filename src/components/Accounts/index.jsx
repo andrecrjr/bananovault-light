@@ -21,13 +21,16 @@ function ListAccounts() {
             </thead>
             <tbody>
               <tr>
-                <td className="table-child px-4 text-xs md:text-sm text-white">
-                  <Link to="/account/number">
+                <td className="table-child px-4 w-55% sm:w-8/12 text-xs md:text-sm text-white">
+                  <Link
+                    to={`/account/${`ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke`}`}
+                  >
                     ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
                   </Link>
                 </td>
                 <td className="table-child--left text-2xs md:text-sm pr-4 text-white text-right">
-                  2000 BAN
+                  <span className="text-xs pl-2"> 2000 BAN</span>
+                  <span className="text-2xs block pl-2"> $ 20.10</span>
                 </td>
               </tr>
             </tbody>

@@ -1,25 +1,31 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainRoute from "./routes/Main";
 import AccountRoutes from "./routes/Accounts";
 import ListAccountsRoutes from "./routes/ListAccounts";
 import Send from "./routes/Send";
+import Settings from "./routes/Settings";
 
 function App() {
   return (
     <Router>
-      <Route exact path="/">
-        <MainRoute />
-      </Route>
-      <Route exact path="/accounts">
-        <ListAccountsRoutes />
-      </Route>
-      <Route path="/account/:bananoaccount">
-        <AccountRoutes />
-      </Route>
-      <Route path="/send">
-        <Send />
-      </Route>
+      <Switch>
+            <Route exact path="/">
+              <MainRoute />
+            </Route>
+            <Route path="/accounts">
+              <ListAccountsRoutes />
+            </Route>
+            <Route path="/account/:bananoaccount">
+              <AccountRoutes />
+            </Route>
+            <Route path="/send">
+              <Send />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+      </Switch>
     </Router>
   );
 }

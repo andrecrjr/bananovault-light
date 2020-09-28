@@ -10537,6 +10537,10 @@ table tbody tr:nth-child(even){
   font-size: 0.60rem;
 }
 
+.text-3xs {
+  font-size: 8px;
+}
+
 .leading-3 {
   line-height: .75rem;
 }
@@ -16237,6 +16241,14 @@ table tbody tr:nth-child(even){
 
 .w-screen {
   width: 100vw;
+}
+
+.w-50\% {
+  width: 50%;
+}
+
+.w-55\% {
+  width: 55%;
 }
 
 .z-0 {
@@ -28810,6 +28822,10 @@ body{
     font-size: 0.60rem;
   }
 
+  .sm\:text-3xs {
+    font-size: 8px;
+  }
+
   .sm\:leading-3 {
     line-height: .75rem;
   }
@@ -34510,6 +34526,14 @@ body{
 
   .sm\:w-screen {
     width: 100vw;
+  }
+
+  .sm\:w-50\% {
+    width: 50%;
+  }
+
+  .sm\:w-55\% {
+    width: 55%;
   }
 
   .sm\:z-0 {
@@ -47038,6 +47062,10 @@ body{
     font-size: 0.60rem;
   }
 
+  .md\:text-3xs {
+    font-size: 8px;
+  }
+
   .md\:leading-3 {
     line-height: .75rem;
   }
@@ -52738,6 +52766,14 @@ body{
 
   .md\:w-screen {
     width: 100vw;
+  }
+
+  .md\:w-50\% {
+    width: 50%;
+  }
+
+  .md\:w-55\% {
+    width: 55%;
   }
 
   .md\:z-0 {
@@ -65266,6 +65302,10 @@ body{
     font-size: 0.60rem;
   }
 
+  .lg\:text-3xs {
+    font-size: 8px;
+  }
+
   .lg\:leading-3 {
     line-height: .75rem;
   }
@@ -70966,6 +71006,14 @@ body{
 
   .lg\:w-screen {
     width: 100vw;
+  }
+
+  .lg\:w-50\% {
+    width: 50%;
+  }
+
+  .lg\:w-55\% {
+    width: 55%;
   }
 
   .lg\:z-0 {
@@ -83494,6 +83542,10 @@ body{
     font-size: 0.60rem;
   }
 
+  .xl\:text-3xs {
+    font-size: 8px;
+  }
+
   .xl\:leading-3 {
     line-height: .75rem;
   }
@@ -89194,6 +89246,14 @@ body{
 
   .xl\:w-screen {
     width: 100vw;
+  }
+
+  .xl\:w-50\% {
+    width: 50%;
+  }
+
+  .xl\:w-55\% {
+    width: 55%;
   }
 
   .xl\:z-0 {
