@@ -13,7 +13,9 @@ function Send() {
             className="w-8/12 h-8 mx-auto rounded-sm  mt-2"
             id="banano"
           >
-            <option className="text-center">ban_1eroshi...66e3ke</option>
+            <option className="text-center">
+              ban_1eroshi...66e3ke(200 BANANO)
+            </option>
           </select>
           <label className="pt-3 text-white text-center" for="to-account">
             To account:
