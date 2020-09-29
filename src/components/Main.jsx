@@ -1,14 +1,17 @@
 import React from "react";
 import Layout from "./Layout";
+import { Link } from "react-router-dom";
 function Main() {
   return (
     <Layout>
       <section className="structure md:mx-auto lg:w-8/12">
         <div className="flex flex-col items-center sm:flex-row">
-          <button className="button--main">Criar Wallet</button>
-          <button className="button--main mt-5 sm:mt-0 sm:ml-2">
-            Importar Wallet
-          </button>
+          <Link to="/settings/wallet" className="button--main text-center md:w-6/12">
+                Criar Wallet
+          </Link>
+          <Link to="/settings/wallet/import" className="button--main text-center md:w-6/12 mt-5 sm:mt-0 sm:ml-2">
+              Importar Wallet
+          </Link>
         </div>
         <div className="text-white p-2 mt-4">
           <h1 className="pb-2">Why Use BanVault?</h1>

@@ -3,7 +3,6 @@ import Layout from "../Layout";
 import { Route, Link, useRouteMatch, Switch } from "react-router-dom";
 import Manage from "./Manage";
 import Representative from "./Representative";
-import AppSettings from "./AppSettings";
 import Wallet from "./Wallet";
 
 function Settings() {
@@ -15,9 +14,6 @@ function Settings() {
       <div className="structure shadow-none py-5 sm:py-2">
         <nav>
           <ul className="flex flex-col text-center text-white text-xs justify-evenly sm:flex-row">
-            <li>
-              <Link to={`${url}/app-settings`}>App Settings</Link>
-            </li>
             <li className="pt-2 sm:pt-0">
               <Link to={`${url}/representative`}>Representative</Link>
             </li>
@@ -40,9 +36,6 @@ function Settings() {
           </Route>
           <Route path={`${path}/wallet`}>
             <Wallet />
-          </Route>
-          <Route path={`${path}/app-settings`}>
-            <AppSettings />
           </Route>
         </Switch>
       </div>

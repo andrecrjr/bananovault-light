@@ -20,7 +20,7 @@ function Accounts() {
         </div>
         <div className="flex flex-row justify-evenly sm:flex-col items-end">
           <div className="flex flex-col font-thin">
-            <p> Balance:</p>
+            <p>Balance:</p>
             <p className="w-auto align-end">0 BAN</p>
           </div>
           <div className="flex flex-col font-thin">
