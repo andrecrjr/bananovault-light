@@ -1,5 +1,5 @@
 import React from "react";
-import Accounts from "../../components/Accounts/Account";
+import Accounts from "./Accounts";
 function AccountsRoutes() {
   return <Accounts />;
 }

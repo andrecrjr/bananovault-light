@@ -1,5 +1,5 @@
 import React from "react";
-import Send from "../../components/Send";
+import Send from "./Send";
 function SendPage() {
   return <Send />;
 }

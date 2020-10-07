@@ -1,5 +1,5 @@
 import React from "react";
-import Settings from "../../components/Settings";
+import Settings from "./SettingsComponents";
 function SettingsRoutes() {
   return <Settings />;
 }

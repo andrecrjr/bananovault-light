@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../Layout";
+import Layout from "../../components/Layout";
 
 function Accounts() {
   return (
@@ -38,37 +38,48 @@ function Accounts() {
   );
 }
 
-const TableTransactions = () =>{
+const TableTransactions = () => {
   return (
     <>
-    <h1 className="structure--title">Recent Transactions</h1> 
-    <div className="structure md:w-9/12 sm:grid text-white mb-10">
-      <table class="table-auto rounded-lg">
+      <h1 className="structure--title">Recent Transactions</h1>
+      <div className="structure md:w-9/12 sm:grid text-white mb-10">
+        <table class="table-auto rounded-lg">
           <thead>
             <tr className="bg-weak-gray">
-              <th className="text-left py-4 px-10 uppercase ">Account</th>
+              <th className="text-left py-4 px-4 uppercase ">Account</th>
               <th className="text-right uppercase pr-5 md:pr-10">Amount</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="break-all text-xs w-8/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+15.0 BAN</td>
+              <td className="break-all py-4 px-4 text-xs w-8/12 ">
+                ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+              </td>
+              <td className="text-right pr-5 md:pr-10 text-2xs text-green">
+                +15.0 BAN
+              </td>
             </tr>
             <tr>
-              <td className="break-all text-xs w-9/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+15.0 BAN</td>
+              <td className="break-all text-xs w-9/12 py-4 px-4">
+                ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+              </td>
+              <td className="text-right pr-5 md:pr-10 text-2xs text-green">
+                +15.0 BAN
+              </td>
             </tr>
             <tr>
-              <td className="break-all text-xs w-9/12 py-4 px-10">ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke</td>
-              <td className="text-right pr-5 md:pr-10 text-2xs text-green">+100000.0 BAN</td>
+              <td className="break-all text-xs w-9/12 py-4 px-4">
+                ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+              </td>
+              <td className="text-right pr-5 md:pr-10 text-2xs text-green">
+                +100000.0 BAN
+              </td>
             </tr>
           </tbody>
-      </table>
-
-    </div>
+        </table>
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default Accounts;

@@ -1,10 +1,10 @@
 module.exports = {
-  purge: [],
+
   theme: {
     extend: {
-      width:  {
-        "50%":  "50%",
-        "55%":  "55%",
+      width: {
+        "50%": "50%",
+        "55%": "55%",
       },
       fontSize: {
         "2xs": "0.60rem",

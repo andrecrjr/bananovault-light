@@ -3,29 +3,32 @@ import React from "react";
 function Representative() {
   return (
     <>
-      <h1 className="structure--title mt-0">Representatives</h1>
-      <section className="structure mx-auto px-2">
-        <h2 className="text-xs text-white">
-          You have delegated voting weight to the following representatives
-        </h2>
-        <table className="text-xs text-white">
-          <thead>
-            <tr className="font-bold">
-              <td className="pb-4">Status</td>
-              <td className="pb-4">Representatives</td>
-              <td className="pb-4">Weight</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="pb-4">Unknown</td>
-              <td className="pb-4">ban_3pyd7i...x6x</td>
-              <td className="pb-4">0</td>
-            </tr>
-          </tbody>
-        </table>
+      <section className="mx-auto px-2">
+        <section className="w-full">
+          <h1 className="structure--title mt-0">Representatives</h1>
+
+          <h2 className="text-xs text-white">
+            You have delegated voting weight to the following representatives
+          </h2>
+          <table className="text-xs w-full text-white">
+            <thead>
+              <tr className="font-bold">
+                <td className="pb-4">Status</td>
+                <td className="pb-4">Representatives</td>
+                <td className="pb-4">Weight</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="pb-4">Unknown</td>
+                <td className="pb-4">ban_3pyd7i...x6x</td>
+                <td className="pb-4">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
       </section>
-      <section className="structure mt-10">
+      <section className="mt-5">
         <ChangeRepresentative />
       </section>
     </>

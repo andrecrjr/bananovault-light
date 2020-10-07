@@ -1,5 +1,5 @@
 import React from "react";
-import ListAccounts from "../../components/Accounts";
+import ListAccounts from "./Account";
 function ListAccountsRoutes() {
   return <ListAccounts />;
 }
