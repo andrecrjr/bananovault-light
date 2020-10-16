@@ -1,13 +1,4 @@
-export const BanWallet = {
-  bananoWallet: {
-    seed: "",
-    mainBanAddress: "",
-    locked: true,
-    type: "seed",
-  },
-};
-
-export const BanSettings = {
+export const bananoSettings = {
   banUser: {
     displayDenomination: "BANANO",
     walletStore: "localStorage",
@@ -22,4 +13,12 @@ export const BanSettings = {
     serverWS: null,
     minimumReceive: null,
   },
+};
+
+export const banWallet = {
+  seed: "",
+  mainBanAddress: "",
+  locked: true,
+  type: "seed",
+  timer: 10000,
 };

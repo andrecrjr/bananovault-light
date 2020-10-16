@@ -1,6 +1,6 @@
-import React from "react";
-import SecureLS from "secure-ls";
-import { banWallet } from "../Wallet/CreateWallet";
+import React, { useContext } from "react";
+import { WalletContext } from "../../../../context";
+import {createUserBan} from './helper'
 
 function Manage() {
   return (
@@ -28,43 +28,67 @@ function Manage() {
 }
 
 export const CreateChangePassword = ({ create, update }) => {
+  const { dispatchWallet, password } = useContext(WalletContext);
   const [data, setData] = React.useState({
     input1: "",
     input2: "",
     error: false,
   });
-  const updateCreatePass = (e) => {
+  const updateCreatePass = async (e) => {
     e.preventDefault();
-    if (data.input1 === data.input2) {
-      var ls = new SecureLS({ encodingType: "AES", isCompression: false });
-      const userData = ls.get("banWallet");
-      ls.set("banWallet", { ...userData, ...{ password: data.input1 } });
-      console.log(ls.get("banWallet"));
-      setData({ ...data, ...{ error: false } });
+    if (
+      data.input1 === data.input2 &&
+      data.input1 !== "" &&
+      data.input2 !== "" &&
+      create
+    ) {
+      setData((data) => ({ ...data, ...{ error: false } }));
+      createUserBan()
+      dispatchWallet({ type: "CREATE_PASSWORD", payload: await createUserBan(data.input1) });
     } else {
-      setData({ ...data, ...{ error: true } });
+      setData((data) => ({ ...data, ...{ error: true } }));
+    }
+    if (
+      data.input1 !== "" &&
+      data.input2 !== "" &&
+      data.input2 === data.input1 &&
+      password.password.length > 0 &&
+      update
+    ) {
+      setData((data) => ({ ...data, ...{ error: false } }));
+      dispatchWallet({
+        type: "UPDATE_PASSWORD",
+        payload: { actualValue: password.password, newValue:data.input1 },
+      });
+    } else {
+      setData((data) => ({ ...data, ...{ error: true } }));
     }
   };
   return (
-    <section className="flex flex-col items-center">
-      <h1 className="structure--title mt-0">
+    <section className='flex flex-col items-center'>
+      <h1 className='structure--title mt-0'>
         {create ? `Create` : `Update`} Wallet Password
       </h1>
 
-      <div className="flex items-center flex-col sm:flex-row sm:justify-center">
+      <div className='flex items-center flex-col sm:flex-row sm:justify-center'>
         <input
-          type="text"
+          type='text'
           onChange={(e) => setData({ ...data, ...{ input1: e.target.value } })}
-          placeholder="New password"
+          placeholder='New password'
         />
         <input
-          type="text"
+          type='text'
           onChange={(e) => setData({ ...data, ...{ input2: e.target.value } })}
-          className="mt-2 sm:mt-0 sm:ml-5"
-          placeholder="Confirm New Password"
+          className='mt-2 sm:mt-0 sm:ml-5'
+          placeholder='Confirm New Password'
         />
       </div>
-      <button onClick={updateCreatePass} className="button--main w-5/12 mt-4">
+      <button
+        onClick={updateCreatePass}
+        disabled={(data.input1 !== "" && data.input2 !== "" && create) 
+        || (update && password.password.length > 0) ? false : true}
+        className='button--main w-5/12 mt-4'
+      >
         {create ? `Create` : `Update`} Password
       </button>
     </section>
