@@ -43,8 +43,10 @@ export const CreateChangePassword = ({ create, update }) => {
       create
     ) {
       setData((data) => ({ ...data, ...{ error: false } }));
-      createUserBan()
-      dispatchWallet({ type: "CREATE_PASSWORD", payload: await createUserBan(data.input1) });
+      dispatchWallet({
+        type: "UPDATE_WALLET",
+        payload: await createUserBan(data.input1),
+      });
     } else {
       setData((data) => ({ ...data, ...{ error: true } }));
     }

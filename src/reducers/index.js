@@ -18,9 +18,6 @@ export const PassReducer = (state, action) => {
 export const WalletReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WALLET":
-      return { ...state, ...action.payload };
-    case "CREATE_PASSWORD":
-      console.log(action.payload);
       localStorage.setItem(
         "banWallet",
         JSON.stringify({ ...state, ...action.payload })

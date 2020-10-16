@@ -14,13 +14,10 @@ import { initialWallet, initialPass } from "./reducers";
 function App() {
   const [state, dispatchWallet] = useReducer(WalletReducer, initialWallet);
   const [password, dispatchPass] = useReducer(PassReducer, initialPass);
-  React.useEffect(() => {
-    
-  }, []);
+
   return (
     <WalletContext.Provider
-      value={{ state, dispatchWallet, 
-        password, dispatchPass }}   
+      value={{ state, dispatchWallet, password, dispatchPass }}
     >
       <Router>
         <Switch>

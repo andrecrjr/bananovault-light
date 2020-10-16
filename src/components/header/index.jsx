@@ -11,8 +11,9 @@ function Header() {
   const { password, dispatchPass, state } = React.useContext(WalletContext);
   const [pass, setPass] = React.useState("");
   const unlock = () => {
-    console.log(state);
-    unlockPass(password, state, dispatchPass, pass);
+    if (pass.length > 0) {
+      unlockPass(password, state, dispatchPass, pass);
+    }
   };
   return (
     <header className='w-full h-full shadow-xl p-4 text-white'>
