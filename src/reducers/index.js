@@ -22,7 +22,22 @@ export const WalletReducer = (state, action) => {
         "banWallet",
         JSON.stringify({ ...state, ...action.payload })
       );
-      return { ...state, ...action.payload };
+      return {...state, ...{ ...action.payload } };
+    case "UPDATE_PASSWORD":
+      const decryptedBytes = CryptoJS.AES.decrypt(
+        state.seed,
+        action.payload.actualValue
+      );
+      const decryptedSeed = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      let walletEncrypted = CryptoJS.AES.encrypt(
+        decryptedSeed,
+        action.payload.newValue
+      ).toString();
+      localStorage.setItem("banWallet", JSON.stringify({
+        ...state,
+        ...{ seed: walletEncrypted }
+      }))
+      return {...state, ...{seed:walletEncrypted}};
     default:
       return state;
   }

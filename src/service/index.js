@@ -7,13 +7,22 @@ bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 export const createNewWallet = async () => {
   try {
     const seed = crypto.randomBytes(32).toString("hex");
+    const seedData = await createUsingSeed(seed);
+    return { ...seedData };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const createUsingSeed = async (seed) => {
+  try {
     const privateKey = bananojs.getPrivateKey(seed, 0);
     const publicKey = bananojs.getPublicKey(privateKey);
     const banAddress = bananojs.getAccount(publicKey, "ban_");
     let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
-    return { banAddress, seed, url };
-  } catch (e) {
-    console.log(e);
+    return { publicKey, banAddress, url, seed };
+  } catch (error) {
+    console.log(error);
   }
 };
 

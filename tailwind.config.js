@@ -1,5 +1,4 @@
 module.exports = {
-
   theme: {
     extend: {
       width: {
@@ -16,6 +15,7 @@ module.exports = {
       },
       backgroundColor: {
         "weak-gray": "#4c4a53",
+        "dark-gray": "var(--background-color)",
       },
     },
     stroke: {
