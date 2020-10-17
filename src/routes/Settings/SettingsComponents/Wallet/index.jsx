@@ -69,17 +69,20 @@ const ImportWallet = () => {
             placeholder='Put your Banano seed'
             onChange={(e) => setSeed(e.target.value)}
             value={seed}
+            autoComplete={"off"}
           />
-          <button onClick={(e)=>{
-              e.preventDefault()
-              seed !== "" &&  setModal((status) => !status)
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              seed !== "" && setModal((status) => !status);
             }}
-            className='button--main w-6/12 md:w-4/12 mt-2 md:mt-0 md:ml-2 p-1'>
+            className='button--main w-6/12 md:w-4/12 mt-2 md:mt-0 md:ml-2 p-1'
+          >
             Import Wallet
           </button>
         </div>
       </section>
-      <Modal modal={{value:modal, setModal}}>
+      <Modal modal={{ value: modal, setModal }}>
         <CreateChangePassword
           create={true}
           importWallet={seed}
