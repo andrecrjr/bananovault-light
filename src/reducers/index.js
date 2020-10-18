@@ -1,15 +1,16 @@
-import CryptoJS from "crypto-js";
+import { updatePassword } from "./helper";
+
 export const initialWallet = JSON.parse(localStorage.getItem("banWallet"));
 
 export const initialPass = {
-  password: "",
+  pass: "",
   timer: 10000,
 };
 
 export const PassReducer = (state, action) => {
   switch (action.type) {
     case "REPLACE_PASSWORD":
-      return { ...state, ...{ password: action.payload } };
+      return { ...state, ...{ pass: action.payload } };
     default:
       return state;
   }
@@ -24,22 +25,27 @@ export const WalletReducer = (state, action) => {
       );
       return { ...state, ...{ ...action.payload } };
     case "REMOVE_IN_ACCOUNTS":
-      return state
-    case "UPDATE_PASSWORD":
-      const decryptedBytes = CryptoJS.AES.decrypt(
-        state.seed,
-        action.payload.actualValue
-      );
-      const decryptedSeed = decryptedBytes.toString(CryptoJS.enc.Utf8);
-      let walletEncrypted = CryptoJS.AES.encrypt(
-        decryptedSeed,
-        action.payload.newValue
-      ).toString();
-      localStorage.setItem("banWallet", JSON.stringify({
+      let removeAddress = {
         ...state,
-        ...{ seed: walletEncrypted }
-      }))
-      return {...state, ...{seed:walletEncrypted}};
+        accounts: state.accounts.filter(
+          (item, index) => item.index !== action.payload
+        ),
+      };
+      localStorage.setItem("banWallet", JSON.stringify(removeAddress));
+      return removeAddress;
+    case "CREATE_NEW_ACCOUNT":
+      let newAddress = {
+        ...state,
+        accounts: [...state.accounts, action.payload],
+      };
+      localStorage.setItem(
+        "banWallet",
+        JSON.stringify({ ...state, ...newAddress })
+      );
+      return newAddress;
+    case "UPDATE_PASSWORD":
+      let walletEncrypted = updatePassword(state, action);
+      return { ...state, ...{ seed: walletEncrypted } };
     default:
       return state;
   }

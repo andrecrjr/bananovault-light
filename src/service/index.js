@@ -1,6 +1,7 @@
 import bananojs from "@bananocoin/bananojs";
 import crypto from "crypto";
 import { isSeedValid } from "@bananocoin/bananojs/app/scripts/banano-util";
+import { getSeedFromPassword } from "./helper";
 
 bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 
@@ -24,7 +25,7 @@ export const createUsingSeed = async (seed) => {
       publicKey,
       url,
       seed,
-      accounts: [{ banAddress, exclude: false }],
+      accounts: [{ banAddress, index: 0 }],
     };
   } catch (error) {
     console.log(error);
@@ -66,17 +67,14 @@ export const setRepresentive = async (seed, newRep) => {
   }
 };
 
-export const getBanAddress = async (seed, index = "0") => {
+export const getBanAddress = async (seedEncoded, password, index = "0") => {
   try {
+    const seed = getSeedFromPassword(seedEncoded, password);;
     if (isSeedValid(seed)) {
       const banAddress = await bananojs.getBananoAccountFromSeed(seed, index);
-      const privateKey = await bananojs.getPrivateKey(seed, index);
-      const publicKey = await bananojs.getPublicKey(privateKey);
       let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
-      return { banAddress, privateKey, publicKey, seed, url };
-    } else {
-      return false;
-    }
+      return { banAddress, url, index };
+    } 
   } catch (error) {
     console.log(error);
     return false;

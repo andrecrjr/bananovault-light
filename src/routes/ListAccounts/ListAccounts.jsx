@@ -1,30 +1,37 @@
 import React, { useEffect } from "react";
 import { WalletContext } from "../../context";
 import Layout from "../../components/Layout";
+import UserAddress from "./UserAddress";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
+import { getBanAddress } from "service";
 
 export default function ListAccounts() {
-  const { state, dispatchWallet } = React.useContext(WalletContext);
-  const [accounts, setaAccounts] = useState([]);
-  useEffect(() => {
-    setaAccounts(state.accounts.filter((item) => !item.exclude));
-  }, [state]);
-
-  const removeAdd = (e, index) => {
-    e.preventDefault()
-    dispatchWallet({type:"UPDATE_WALLET", payload:index})
-    
-    console.log(accounts)
-  }
-
+  const { state, dispatchWallet, password } = React.useContext(WalletContext);
+  const createAdd = async (e, index) => {
+    e.preventDefault();
+    if (password.pass.length > 0) {
+      let data = await getBanAddress(
+        state.seed,
+        password.pass,
+        state.accounts.length
+      );
+      dispatchWallet({
+        type: "CREATE_NEW_ACCOUNT",
+        payload: data,
+      });
+    }
+  };
   return (
     <>
       <Layout>
         <h1 className='structure--title'>Your Accounts</h1>
         {state ? (
-          <section className='structure  pt-5'>
-            <button className='w-7/12 md:w-4/12 block ml-auto mr-3 mb-3 text-2xs button--main'>
+          <section className='structure pt-5'>
+            <button
+              className='w-7/12 md:w-4/12 block ml-auto mr-3 mb-3 text-2xs button--main'
+              onClick={(e) => createAdd(e)}
+            >
               Create New Account
             </button>
             <table class='table-auto rounded-lg'>
@@ -38,27 +45,21 @@ export default function ListAccounts() {
                 </tr>
               </thead>
               <tbody>
-                {accounts.map((userItem, index) => (
-                  <tr>
-                    <td
-                      className="text-white pl-2 cursor-pointer"
-                      onClick={e=>removeAdd(e,index)}
-                    >
-                      X
-                    </td>
-                    <td className='table-child px-3 w-55% sm:w-8/12 text-xs md:text-sm text-white relative'>
-                      <Link to={`/account/${userItem.banAddress}`}>
-                        {userItem.banAddress}
-                      </Link>
-                    </td>
-                    <td className='table-child--left text-2xs md:text-sm pr-4 text-white text-right'>
-                      <span className='text-2xs md:text-xs'> 0 BAN</span>
-                      <span className='text-2xs block pl-2'> $ 0</span>
-                    </td>
-                  </tr>
-                ))}
+                {state.accounts.length > 0 &&
+                  state.accounts.map((userItem, index) => (
+                    <UserAddress
+                      userItem={userItem}
+                      dispatchWallet={dispatchWallet}
+                      password={password}
+                    />
+                  ))}
               </tbody>
             </table>
+            {state.accounts.length === 0 && (
+              <p class='text-white text-center py-4'>
+                No Banano Address here, just tap the New Create Account button!
+              </p>
+            )}
           </section>
         ) : (
           <section className='structure  pt-5'>

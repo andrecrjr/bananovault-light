@@ -5,7 +5,7 @@ export default function Modal({ children, modal }) {
     <div
       className={`${
         modal.value ? `flex` : `hidden`
-      } flex-col items-center bg-black bg-opacity-50  fixed justify-center text-center top-0 left-0 right-0 bottom-0`}
+      } flex-col items-center bg-black z-10 bg-opacity-50  fixed justify-center text-center top-0 left-0 right-0 bottom-0`}
     >
       <div className={`left-5 text-black`}>
         <button

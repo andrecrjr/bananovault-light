@@ -53,7 +53,7 @@ export const validationInputs = async (
   }
 
   if (updatePasswordWallet) {
-    if (password.password.length === 0) {
+    if (password.pass.length === 0) {
       setData((oldstate) => ({
         ...oldstate,
         ...{
@@ -66,7 +66,7 @@ export const validationInputs = async (
     setData((data) => ({ ...data, ...{ error: false } }));
     dispatchWallet({
       type: "UPDATE_PASSWORD",
-      payload: { actualValue: password.password, newValue: data.input1 },
+      payload: { actualValue: password.pass, newValue: data.input1 },
     });
     return true;
   } else {
