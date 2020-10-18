@@ -20,7 +20,12 @@ export const createUsingSeed = async (seed) => {
     const publicKey = bananojs.getPublicKey(privateKey);
     const banAddress = bananojs.getAccount(publicKey, "ban_");
     let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
-    return { publicKey, banAddress, url, seed };
+    return {
+      publicKey,
+      url,
+      seed,
+      accounts: [{ banAddress, exclude: false }],
+    };
   } catch (error) {
     console.log(error);
   }

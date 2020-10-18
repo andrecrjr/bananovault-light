@@ -37,11 +37,10 @@ export const validationInputs = async (
   create,
   update
 ) => {
-  let createdInputs = data.input1 === data.input2 && create;
-  let updatedInputs =
-    data.input1 === data.input2 && password.password.length > 0 && update;
+  let createOrImportWallet = data.input1 === data.input2 && create;
+  let updatePasswordWallet = data.input1 === data.input2 && update;
 
-  if (createdInputs) {
+  if (createOrImportWallet) {
     setData((data) => ({ ...data, ...{ error: false } }));
     dispatchWallet({
       type: "UPDATE_WALLET",
@@ -51,17 +50,9 @@ export const validationInputs = async (
           : await importUserBan(data.input1, importWallet),
     });
     return true;
-  } else {
-    setData((data) => ({ ...data, ...{ error: true } }));
   }
-  if (updatedInputs) {
-    setData((data) => ({ ...data, ...{ error: false } }));
-    dispatchWallet({
-      type: "UPDATE_PASSWORD",
-      payload: { actualValue: password.password, newValue: data.input1 },
-    });
-    return true;
-  } else {
+
+  if (updatePasswordWallet) {
     if (password.password.length === 0) {
       setData((oldstate) => ({
         ...oldstate,
@@ -70,18 +61,21 @@ export const validationInputs = async (
           info: "You need to unlock your wallet with the password.",
         },
       }));
-    } else {
-      setData((data) => ({
-        ...data,
-        ...{
-          error: true,
-          info: "Maybe the passwords are different... Please try again!",
-        },
-      }));
+      return false;
     }
-  }
-
-  if (!createdInputs && !updatedInputs) {
-    setData((data) => ({ ...data, ...{ error: true } }));
+    setData((data) => ({ ...data, ...{ error: false } }));
+    dispatchWallet({
+      type: "UPDATE_PASSWORD",
+      payload: { actualValue: password.password, newValue: data.input1 },
+    });
+    return true;
+  } else {
+    setData((data) => ({
+      ...data,
+      ...{
+        error: true,
+        info: "Maybe the passwords are different... Please try again!",
+      },
+    }));
   }
 };

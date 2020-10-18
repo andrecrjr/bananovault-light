@@ -22,7 +22,9 @@ export const WalletReducer = (state, action) => {
         "banWallet",
         JSON.stringify({ ...state, ...action.payload })
       );
-      return {...state, ...{ ...action.payload } };
+      return { ...state, ...{ ...action.payload } };
+    case "REMOVE_IN_ACCOUNTS":
+      return state
     case "UPDATE_PASSWORD":
       const decryptedBytes = CryptoJS.AES.decrypt(
         state.seed,

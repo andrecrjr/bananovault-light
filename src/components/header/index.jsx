@@ -11,7 +11,7 @@ function Header() {
   const [modal, setModal] = React.useState(false);
   const unlock = () => {
     if (pass.length > 0) {
-      unlockPass(password, state, dispatchPass, pass, setModal);
+      unlockPass(state, dispatchPass, pass, setModal);
     }
   };
   const openModal = () => {
@@ -26,7 +26,7 @@ function Header() {
         <div className='md:absolute md:left-0 md:pl-20'>
           <Link to='/'>[BanVault Light]</Link>
           <button onClick={openModal}>
-            {password.password.length > 0 ? `🔓` : `🔒`}
+            {state && `${password.password.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
         <div className='font-bold'>0 BAN</div>
@@ -62,7 +62,7 @@ function Header() {
   );
 }
 
-const unlockPass = (password, state, dispatchPass, pass, setModal) => {
+const unlockPass = (state, dispatchPass, pass, setModal) => {
   try {
     const decryptedBytes = CryptoJS.AES.decrypt(state.seed, pass);
     const decryptedSeed = decryptedBytes.toString(CryptoJS.enc.Utf8);
