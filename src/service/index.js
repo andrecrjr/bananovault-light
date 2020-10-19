@@ -1,6 +1,9 @@
 import bananojs from "@bananocoin/bananojs";
 import crypto from "crypto";
-import { isSeedValid } from "@bananocoin/bananojs/app/scripts/banano-util";
+import {
+  isSeedValid,
+  getAmountPartsFromRaw,
+} from "@bananocoin/bananojs/app/scripts/banano-util";
 import { getSeedFromPassword } from "./helper";
 
 bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
@@ -69,12 +72,12 @@ export const setRepresentive = async (seed, newRep) => {
 
 export const getBanAddress = async (seedEncoded, password, index = "0") => {
   try {
-    const seed = getSeedFromPassword(seedEncoded, password);;
+    const seed = getSeedFromPassword(seedEncoded, password);
     if (isSeedValid(seed)) {
       const banAddress = await bananojs.getBananoAccountFromSeed(seed, index);
       let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
       return { banAddress, url, index };
-    } 
+    }
   } catch (error) {
     console.log(error);
     return false;
@@ -93,8 +96,7 @@ export const getBalance = async (banAddress) => {
       accountInfo.error &&
       accountInfo.error.indexOf("Account not found") !== -1
     ) {
-      let accountFound = false;
-      accountInfo = { ...accountInfo, accountFound };
+      accountInfo = { ...accountInfo, accountFound: false, balance: 0 };
       return accountInfo;
     } else {
       accountInfo = { ...accountInfo, accountFound: true };
@@ -102,6 +104,11 @@ export const getBalance = async (banAddress) => {
     let urlLastBlock = `https://creeper.banano.cc/explorer/block/${accountInfo.frontier}`;
     accountInfo = {
       ...accountInfo,
+      ...{
+        balance: accountInfo.accountFound
+          ? getAmountPartsFromRaw(accountInfo.balance, "ban_").banano
+          : 0,
+      },
       urlLastBlock,
     };
 

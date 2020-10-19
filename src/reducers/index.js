@@ -43,6 +43,16 @@ export const WalletReducer = (state, action) => {
         JSON.stringify({ ...state, ...newAddress })
       );
       return newAddress;
+    case "UPDATE_HEADER_PRICE":
+      let updatePrice = {
+        ...state,
+        ...{
+          amountBananoWallet: (state.amountBananoWallet = +action.payload
+            .balance),
+        },
+      };
+      console.log(updatePrice);
+      return updatePrice;
     case "UPDATE_PASSWORD":
       let walletEncrypted = updatePassword(state, action);
       return { ...state, ...{ seed: walletEncrypted } };

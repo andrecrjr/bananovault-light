@@ -17,8 +17,8 @@ export const bananoSettings = {
 
 export const banWallet = {
   seed: "",
-  mainBanAddress: "",
   locked: true,
   type: "seed",
-  timer: 10000,
+  timer: 10,
+  amountBananoWallet: 0,
 };

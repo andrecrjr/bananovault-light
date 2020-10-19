@@ -29,7 +29,9 @@ function Header() {
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold'>0 BAN</div>
+        <div className='font-bold'>
+          {state ? state.amountBananoWallet || 0 : 0} BAN
+        </div>
         <Menu />
       </div>
       <Modal modal={{ value: modal, setModal }}>
@@ -59,12 +61,11 @@ const unlockPass = (state, dispatchPass, pass, setPass, setModal) => {
       setPass("");
       return false;
     } else {
-      setPass("");
       dispatchPass({ type: "REPLACE_PASSWORD", payload: pass });
       setTimeout(() => {
         dispatchPass({ type: "REPLACE_PASSWORD", payload: "" });
         console.log("acabou");
-      }, state.timer);
+      }, state.timer * 1000);
       setModal(false);
       return true;
     }

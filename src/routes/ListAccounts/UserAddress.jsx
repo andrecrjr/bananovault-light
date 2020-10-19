@@ -1,11 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getBalance } from "service";
 
 export default function UserAddress({ dispatchWallet, userItem }) {
-  const removeAdd = (e, index) => {
+  const [balance, setBalance] = React.useState(0);
+  const removeAdd = (e) => {
     e.preventDefault();
-    dispatchWallet({ type: "REMOVE_IN_ACCOUNTS", payload: index });
+    dispatchWallet({ type: "REMOVE_IN_ACCOUNTS", payload: userItem.index });
   };
+
+  React.useEffect(() => {
+    async function getBalanceMe() {
+      let account = await getBalance(userItem.banAddress);
+      setBalance(0 || account.balance);
+      console.log(balance);
+      if (parseFloat(account.balance) > 0) {
+        dispatchWallet({
+          type: "UPDATE_HEADER_PRICE",
+          payload: { balance: account.balance },
+        });
+      }
+    }
+
+    getBalanceMe();
+  }, [userItem.banAddress, balance, dispatchWallet]);
 
   return (
     <tr>
@@ -21,7 +39,7 @@ export default function UserAddress({ dispatchWallet, userItem }) {
         </Link>
       </td>
       <td className='table-child--left text-2xs md:text-sm pr-4 text-white text-right'>
-        <span className='text-2xs md:text-xs'> 0 BAN</span>
+        <span className='text-2xs md:text-xs'>{balance ? balance : 0} BAN</span>
         <span className='text-2xs block pl-2'> $ 0</span>
       </td>
     </tr>

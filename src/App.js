@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainRoute from "./routes/Main";
 import AccountRoutes from "./routes/Accounts";
@@ -9,7 +9,6 @@ import { WalletContext } from "./context";
 
 import { WalletReducer, PassReducer } from "./reducers";
 import { initialWallet, initialPass } from "./reducers";
-
 
 function App() {
   const [state, dispatchWallet] = useReducer(WalletReducer, initialWallet);
