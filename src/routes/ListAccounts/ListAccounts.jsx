@@ -25,7 +25,7 @@ export default function ListAccounts() {
   return (
     <>
       <Layout>
-        <h1 className='structure--title'>Your Accounts</h1>
+        <h1 className='structure--title mt-2'>Your Accounts</h1>
         {state ? (
           <section className='structure pt-5'>
             <button

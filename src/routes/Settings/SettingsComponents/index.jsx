@@ -10,23 +10,23 @@ function Settings() {
 
   return (
     <Layout>
-      <h1 className="structure--title mt-1">Settings</h1>
-      <div className="structure shadow-none py-5 sm:py-2">
+      <h1 className='structure--title mt-1'>Settings</h1>
+      <div className='structure shadow-none pb-4 sm:py-2'>
         <nav>
-          <ul className="flex flex-col text-center text-white text-xs justify-evenly sm:flex-row">
-            <li className="pt-2 sm:pt-0">
+          <ul className='flex flex-col text-center text-white text-xs justify-evenly sm:flex-row'>
+            <li className='pt-2 sm:pt-0'>
               <Link to={`${url}/representative`}>Representative</Link>
             </li>
-            <li className="pt-2 sm:pt-0">
+            <li className='pt-2 sm:pt-0'>
               <Link to={`${url}/manage`}>Manage Wallet</Link>
             </li>
-            <li className="pt-2 sm:pt-0">
+            <li className='pt-2 sm:pt-0'>
               <Link to={`${url}/wallet`}>Create or Import Wallet</Link>
             </li>
           </ul>
         </nav>
       </div>
-      <div className="structure py-5">
+      <div className='structure py-5'>
         <Switch>
           <Route path={`${path}/representative`}>
             <Representative />

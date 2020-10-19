@@ -29,7 +29,7 @@ function Header() {
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold'>
+        <div className='font-bold md:mr-12'>
           {state ? state.amountBananoWallet || 0 : 0} BAN
         </div>
         <Menu />

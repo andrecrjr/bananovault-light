@@ -1,22 +1,23 @@
-
-.header__menu--item{
-    padding-top:15px;
-    @apply text-xs;
+.header__menu--item {
+  padding-top: 15px;
+  @apply text-xs;
 }
-.header__menu--item:not(:first-child){
-    @apply pl-4;    
-}
-
-@Media screen and (min-width:768px){
- 
-    .header__menu--item:not(:first-child){
-        @apply pl-3;   
-    }
+.header__menu--item {
+  @apply pl-1;
 }
 
-@Media screen and (min-width:980px){
-    
-    .header__menu--item{
-        @apply text-sm;
-    }
+@media screen and (min-width: 768px) {
+  .header__menu--item:not(:first-child) {
+    @apply pl-3;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .header__menu--item {
+    @apply text-sm;
+  }
+}
+
+#menu:checked ~ ul {
+  transform: translateX(0);
 }
