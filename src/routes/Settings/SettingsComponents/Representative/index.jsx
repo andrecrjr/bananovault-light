@@ -10,21 +10,33 @@ function Representative() {
         <section className='w-full'>
           <h1 className='structure--title mt-0'>Representatives</h1>
           {state &&
-            state.accounts.length > 0 &&
-            state.accounts.some(
-              (item) => item.representative.length > 0 && item.show === true
-            ) && (
-              <RepresentativeTable
-                rep={state.accounts.filter(
-                  (item) => item.show === true && item.representative
-                )}
-              />
-            )}
+          state.accounts.some(
+            (item) =>
+              item.representative &&
+              item.representative.length > 0 &&
+              item.show === true
+          ) ? (
+            <RepresentativeTable
+              rep={state.accounts.filter(
+                (item) => item.show === true && item.representative
+              )}
+            />
+          ) : (
+            <p className='text-white'>
+              No accounts created, please create a new account.
+            </p>
+          )}
         </section>
       </section>
-      <section className='mt-5'>
-        <ChangeRepresentative />
-      </section>
+      {state &&
+      state.accounts.some((item) => item.show === true && item.representative) >
+        0 ? (
+        <section className='mt-5'>
+          <ChangeRepresentative
+            accounts={state.accounts.filter((item) => item.show === true)}
+          />
+        </section>
+      ) : null}
     </>
   );
 }
@@ -60,21 +72,25 @@ export const RepresentativeTable = ({ rep }) => {
   );
 };
 
-export const ChangeRepresentative = () => {
+export const ChangeRepresentative = ({ accounts }) => {
+  const { addressReduce } = useContext(HelperContext);
   return (
     <>
       <h1 className='structure--title my-4 pb-0 mb-1 '>
         Change your representatives
       </h1>
       <section className='sm:w-10/12 mx-auto px-2 flex justify-center items-center flex-col'>
-        <h2 className='text-white'>Account to change:</h2>
-        <select name='representative-choice' className='w-full' id=''>
-          <option>ban_3pyd7if4ds...64as6dx6x</option>
+        <h2 className='text-white mb-3'>Account to change:</h2>
+        <select name='representative-choice' className='w-full h-8  mb-3' id=''>
+          {accounts.length > 0 &&
+            accounts.map((item) => (
+              <option>{addressReduce(item.banAddress)}</option>
+            ))}
         </select>
-        <h2 className='text-white pt-4'>New Representative:</h2>
+        <h2 className='text-white mb-3'>New Representative:</h2>
         <input
           type='text'
-          className='w-full'
+          className='w-full h-8'
           placeholder='new Representative address'
         />
         <button className='button--main  sm:w-6/12 mt-4'>
