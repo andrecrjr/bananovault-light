@@ -27,20 +27,20 @@ export default function UserAddress({ dispatchWallet, userItem }) {
     }
 
     getBalanceMe();
-  }, [balance, dispatchWallet]);
+  }, [balance, dispatchWallet, userItem.balance, userItem.banAddress]);
 
   return (
-    <tr>
-      <td
-        className='text-white pl-2 cursor-pointer'
-        onClick={(e) => removeAdd(e, userItem.index)}
-      >
-        X
+    <tr key={userItem.index}>
+      <td className='text-white pl-3 cursor-pointer text-2xs md:text-sm'>
+        {userItem.index}.
       </td>
-      <td className='table-child px-3 w-55% sm:w-8/12 text-xs md:text-sm text-white relative'>
+      <td className='table-child px-3 pl-1 w-55% sm:w-8/12 text-xs md:text-sm text-white relative'>
         <Link to={`/account/${userItem.banAddress}`}>
           {userItem.banAddress}
         </Link>
+      </td>
+      <td className={`text-white pl-2 cursor-pointer`}>
+        <span onClick={(e) => removeAdd(e, userItem.index)}> X</span>
       </td>
       <td className='table-child--left text-2xs md:text-sm pr-4 text-white text-right'>
         <span className='text-2xs md:text-xs'>{balance ? balance : 0} BAN</span>

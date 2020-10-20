@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { WalletContext } from "../../context";
 import Layout from "../../components/Layout";
 import UserAddress from "./UserAddress";
@@ -38,8 +38,9 @@ export default function ListAccounts() {
             <table class='table-auto rounded-lg'>
               <thead>
                 <tr>
-                  <td className='text-center text-white uppercase'></td>
+                  <td></td>
                   <td className='text-center text-white uppercase'>Address</td>
+                  <td></td>
                   <td className='text-right pr-3 text-white py-4 uppercase'>
                     Balance
                   </td>
