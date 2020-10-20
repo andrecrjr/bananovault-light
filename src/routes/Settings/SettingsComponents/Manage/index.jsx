@@ -7,7 +7,7 @@ function Manage() {
   return (
     <>
       <CreateChangePassword update={true} />
-      <section class='mt-10'>
+      <section className='mt-10'>
         <h1 className='structure--title mt-0'>Export BananoVault Wallet</h1>
         <div className='p-3 pt-0 '>
           <p className='text-white text-xs'>
@@ -65,12 +65,12 @@ export const CreateChangePassword = ({ create, update, importWallet }) => {
       {data.error ? <p className='text-white'>{data.info}</p> : null}
       <div className='flex items-center flex-col sm:flex-row sm:justify-center'>
         <input
-          type='text'
+          type='password'
           onChange={(e) => setData({ ...data, ...{ input1: e.target.value } })}
           placeholder='New password'
         />
         <input
-          type='text'
+          type='password'
           onChange={(e) => setData({ ...data, ...{ input2: e.target.value } })}
           className='mt-2 sm:mt-0 sm:ml-5'
           placeholder='Confirm New Password'

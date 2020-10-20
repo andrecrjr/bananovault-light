@@ -59,7 +59,7 @@ export default function ListAccounts() {
                   )}
               </tbody>
             </table>
-            {state.accounts.length === 0 && (
+            {!state.accounts.some((item) => item.show) && (
               <p class='text-white text-center py-4'>
                 No Banano Address here, just tap the New Create Account button!
               </p>

@@ -57,8 +57,8 @@ export const RepresentativeTable = ({ rep }) => {
           </tr>
         </thead>
         <tbody>
-          {rep.map((item) => (
-            <tr>
+          {rep.map((item, index) => (
+            <tr key={index}>
               <td className='pb-4'>Unknown</td>
               <td className='pb-4'>
                 {item.representative && addressReduce(item.representative)}
@@ -84,7 +84,7 @@ export const ChangeRepresentative = ({ accounts }) => {
         <select name='representative-choice' className='w-full h-8  mb-3' id=''>
           {accounts.length > 0 &&
             accounts.map((item) => (
-              <option>{addressReduce(item.banAddress)}</option>
+              <option key={item.index}>{addressReduce(item.banAddress)}</option>
             ))}
         </select>
         <h2 className='text-white mb-3'>New Representative:</h2>
