@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { WalletContext } from "../../context";
 import Layout from "../../components/Layout";
 import UserAddress from "./UserAddress";
@@ -8,6 +8,7 @@ import { getBanAddress } from "service";
 
 export default function ListAccounts() {
   const { state, dispatchWallet, password } = React.useContext(WalletContext);
+
   const createAdd = async (e, index) => {
     e.preventDefault();
     if (password.pass.length > 0) {
@@ -18,7 +19,7 @@ export default function ListAccounts() {
       );
       dispatchWallet({
         type: "CREATE_NEW_ACCOUNT",
-        payload: data,
+        payload: { ...data, show: true },
       });
     }
   };
@@ -46,13 +47,15 @@ export default function ListAccounts() {
               </thead>
               <tbody>
                 {state.accounts.length > 0 &&
-                  state.accounts.map((userItem, index) => (
-                    <UserAddress
-                      userItem={userItem}
-                      dispatchWallet={dispatchWallet}
-                      password={password}
-                    />
-                  ))}
+                  state.accounts.map((userItem, index) =>
+                    userItem.show ? (
+                      <UserAddress
+                        userItem={userItem}
+                        dispatchWallet={dispatchWallet}
+                        password={password}
+                      />
+                    ) : null
+                  )}
               </tbody>
             </table>
             {state.accounts.length === 0 && (

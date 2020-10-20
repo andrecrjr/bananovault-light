@@ -21,4 +21,5 @@ export const banWallet = {
   type: "seed",
   timer: 10,
   amountBananoWallet: 0,
+  accounts: [],
 };

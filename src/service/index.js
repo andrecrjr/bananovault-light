@@ -1,4 +1,4 @@
-import bananojs from "@bananocoin/bananojs";
+import bananojs, { bananodeApi } from "@bananocoin/bananojs";
 import crypto from "crypto";
 import {
   isSeedValid,
@@ -23,12 +23,15 @@ export const createUsingSeed = async (seed) => {
     const privateKey = bananojs.getPrivateKey(seed, 0);
     const publicKey = bananojs.getPublicKey(privateKey);
     const banAddress = bananojs.getAccount(publicKey, "ban_");
+    const data = await bananodeApi.getAccountRepresentative(banAddress);
+    let representative = await bananodeApi.getAccountRepresentative(banAddress);
+    console.log(data);
     let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
     return {
       publicKey,
       url,
       seed,
-      accounts: [{ banAddress, index: 0 }],
+      accounts: [{ banAddress, index: 0, representative, show: true }],
     };
   } catch (error) {
     console.log(error);
@@ -76,7 +79,7 @@ export const getBanAddress = async (seedEncoded, password, index = "0") => {
     if (isSeedValid(seed)) {
       const banAddress = await bananojs.getBananoAccountFromSeed(seed, index);
       let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
-      return { banAddress, url, index };
+      return { banAddress, url, index, show: true };
     }
   } catch (error) {
     console.log(error);
@@ -106,7 +109,7 @@ export const getBalance = async (banAddress) => {
       ...accountInfo,
       ...{
         balance: accountInfo.accountFound
-          ? getAmountPartsFromRaw(accountInfo.balance, "ban_").banano
+          ? getAmountPartsFromRaw(accountInfo.balance || 0, "ban_").banano
           : 0,
       },
       urlLastBlock,

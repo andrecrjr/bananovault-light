@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Menu() {
   return (
     <>
-      <label for='menu' className='absolute top-0 right-0 md:hidden'>
+      <label for='menu' className='absolute top-0 z-10 right-0 md:hidden'>
         Menu
       </label>
       <input type='checkbox' id='menu' className='hidden' />

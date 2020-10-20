@@ -7,6 +7,10 @@ export default function UserAddress({ dispatchWallet, userItem }) {
   const removeAdd = (e) => {
     e.preventDefault();
     dispatchWallet({ type: "REMOVE_IN_ACCOUNTS", payload: userItem.index });
+    dispatchWallet({
+      type: "MINUS_HEADER_PRICE",
+      payload: { balance: userItem.balance },
+    });
   };
 
   React.useEffect(() => {
@@ -16,14 +20,14 @@ export default function UserAddress({ dispatchWallet, userItem }) {
       console.log(balance);
       if (parseFloat(account.balance) > 0) {
         dispatchWallet({
-          type: "UPDATE_HEADER_PRICE",
+          type: "ADD_HEADER_PRICE",
           payload: { balance: account.balance },
         });
       }
     }
 
     getBalanceMe();
-  }, [userItem.banAddress, balance, dispatchWallet]);
+  }, [balance, dispatchWallet]);
 
   return (
     <tr>

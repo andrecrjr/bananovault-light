@@ -7,18 +7,18 @@ function Manage() {
   return (
     <>
       <CreateChangePassword update={true} />
-      <section class="mt-10">
-        <h1 className="structure--title mt-0">Export BananoVault Wallet</h1>
-        <div className="p-3 pt-0 ">
-          <p className="text-white text-xs">
+      <section class='mt-10'>
+        <h1 className='structure--title mt-0'>Export BananoVault Wallet</h1>
+        <div className='p-3 pt-0 '>
+          <p className='text-white text-xs'>
             Use this export tool to simplify wallet transfer to other devices.
             Your data will be encrypted by your password, and then imported into
             BananoVault on your new device! The export does not contain your
             address book.
           </p>
-          <div className="flex flex-col items-center sm:flex-row">
-            <button className="button--main">Export as File</button>
-            <button className="button--main mt-4 sm:mt-0 sm:ml-4">
+          <div className='flex flex-col items-center sm:flex-row'>
+            <button className='button--main'>Export as File</button>
+            <button className='button--main mt-4 sm:mt-0 sm:ml-4'>
               Export QR Code
             </button>
           </div>
@@ -29,32 +29,32 @@ function Manage() {
 }
 
 export const CreateChangePassword = ({ create, update, importWallet }) => {
-  const history = useHistory()
-  console.log(importWallet);;
+  const history = useHistory();
+
   const { dispatchWallet, password } = useContext(WalletContext);
   const [data, setData] = React.useState({
     input1: "",
     input2: "",
     error: false,
-    info:""
+    info: "",
   });
 
   const updateCreatePass = async (e) => {
     e.preventDefault();
-    setData(data => ({ ...data, ...{ error: false, info: "" } }))
-    const isValidated = await validationInputs(data,
-        setData,  
-         password,
-         dispatchWallet,
-         importWallet,
-         create,    
-         update
+    setData((data) => ({ ...data, ...{ error: false, info: "" } }));
+    const isValidated = await validationInputs(
+      data,
+      setData,
+      password,
+      dispatchWallet,
+      importWallet,
+      create,
+      update
     );
 
     if (isValidated) {
       history.push("/");
     }
-  
   };
 
   return (
@@ -62,20 +62,16 @@ export const CreateChangePassword = ({ create, update, importWallet }) => {
       <h1 className='structure--title mt-0'>
         {create ? `Create` : `Update`} Wallet Password
       </h1>
-      {data.error ? (
-        <p className='text-white'>
-          {data.info}
-        </p>
-      ) : null}
+      {data.error ? <p className='text-white'>{data.info}</p> : null}
       <div className='flex items-center flex-col sm:flex-row sm:justify-center'>
         <input
           type='text'
-          onChange={(e) => (setData({...data, ...{ input1: e.target.value } }))}
+          onChange={(e) => setData({ ...data, ...{ input1: e.target.value } })}
           placeholder='New password'
         />
         <input
           type='text'
-          onChange={(e) =>( setData({...data, ...{ input2: e.target.value } }))}
+          onChange={(e) => setData({ ...data, ...{ input2: e.target.value } })}
           className='mt-2 sm:mt-0 sm:ml-5'
           placeholder='Confirm New Password'
         />
@@ -84,9 +80,7 @@ export const CreateChangePassword = ({ create, update, importWallet }) => {
         onClick={updateCreatePass}
         disabled={
           (data.input1 !== "" && data.input2 !== "" && create) ||
-            (update &&
-              data.input1 !== "" &&
-              data.input2 !== "")
+          (update && data.input1 !== "" && data.input2 !== "")
             ? false
             : true
         }
@@ -97,7 +91,5 @@ export const CreateChangePassword = ({ create, update, importWallet }) => {
     </section>
   );
 };
-
-
 
 export default Manage;
