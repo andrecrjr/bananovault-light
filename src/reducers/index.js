@@ -1,6 +1,10 @@
 import { updatePassword } from "./helper";
 
-export const initialWallet = JSON.parse(localStorage.getItem("banWallet"));
+export const initialWallet = {
+  ...JSON.parse(localStorage.getItem("banWallet")),
+  balance: 0,
+};
+export const initialAmount = { value: 0 };
 
 export const initialPass = {
   pass: "",
@@ -11,6 +15,20 @@ export const PassReducer = (state, action) => {
   switch (action.type) {
     case "REPLACE_PASSWORD":
       return { ...state, ...{ pass: action.payload } };
+    default:
+      return state;
+  }
+};
+
+export const AmountReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_HEADER_PRICE":
+      console.log(state);
+      let updatePrice = parseFloat(state.value) + parseFloat(action.payload);
+      return { value: updatePrice };
+    case "MINUS_HEADER_PRICE":
+      let minosPrice = parseFloat(state.value) - parseFloat(action.payload);
+      return { value: minosPrice };
     default:
       return state;
   }
@@ -57,24 +75,6 @@ export const WalletReducer = (state, action) => {
       }
       localStorage.setItem("banWallet", JSON.stringify({ ...newAddress }));
       return newAddress;
-    case "ADD_HEADER_PRICE":
-      let updatePrice = {
-        ...state,
-        ...{
-          amountBananoWallet: (state.amountBananoWallet = +action.payload
-            .balance),
-        },
-      };
-      return updatePrice;
-    case "MINUS_HEADER_PRICE":
-      let minosPrice = {
-        ...state,
-        ...{
-          amountBananoWallet: (state.amountBananoWallet = -action.payload
-            .balance),
-        },
-      };
-      return minosPrice;
     case "UPDATE_PASSWORD":
       let walletEncrypted = updatePassword(state, action);
       return { ...state, ...{ seed: walletEncrypted } };

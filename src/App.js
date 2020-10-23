@@ -7,21 +7,27 @@ import Send from "./routes/Send";
 import Settings from "./routes/Settings";
 import { WalletContext, HelperContext } from "./context";
 
-import { WalletReducer, PassReducer } from "./reducers";
-import { initialWallet, initialPass } from "./reducers";
+import { WalletReducer, PassReducer, AmountReducer } from "./reducers";
+import { initialWallet, initialPass, initialAmount } from "./reducers";
 
 function App() {
   const [state, dispatchWallet] = useReducer(WalletReducer, initialWallet);
   const [password, dispatchPass] = useReducer(PassReducer, initialPass);
+  const [amount, dispatchAmount] = useReducer(AmountReducer, initialAmount);
   const addressReduce = (address) => {
     let firstPart = address.substring(0, 11);
     let secondPart = address.substring(55, 64);
     return `${firstPart}...${secondPart}`;
   };
   return (
-    <HelperContext.Provider value={{ addressReduce }}>
+    <HelperContext.Provider value={{ addressReduce, dispatchAmount, amount }}>
       <WalletContext.Provider
-        value={{ state, dispatchWallet, password, dispatchPass }}
+        value={{
+          state,
+          dispatchWallet,
+          password,
+          dispatchPass,
+        }}
       >
         <Router>
           <Switch>
@@ -31,7 +37,7 @@ function App() {
             <Route path='/accounts'>
               <ListAccountsRoutes />
             </Route>
-            <Route exact path='/account/:bananoaccount'>
+            <Route exact path='/account/:bananoAddress'>
               <AccountRoutes />
             </Route>
             <Route path='/send'>

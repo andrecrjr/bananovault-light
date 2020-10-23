@@ -18,7 +18,6 @@ export const importUserBan = async (password, seed) => {
   try {
     const data = await createUsingSeed(seed);
     if (data) {
-      console.log(password);
       let walletEncrypted = CryptoJS.AES.encrypt(seed, password).toString();
       let state = { ...banWallet, ...data, ...{ seed: walletEncrypted } };
       return state;

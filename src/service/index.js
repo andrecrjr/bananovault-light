@@ -3,10 +3,13 @@ import crypto from "crypto";
 import {
   isSeedValid,
   getAmountPartsFromRaw,
+  getAccount,
 } from "@bananocoin/bananojs/app/scripts/banano-util";
 import { getSeedFromPassword } from "./helper";
+import { getAccountHistory } from "@bananocoin/bananojs/app/scripts/bananode-api";
 
-bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
+let bananoApi = "https://kaliumapi.appditto.com/api";
+bananojs.setBananodeApiUrl(bananoApi);
 
 export const createNewWallet = async () => {
   try {
@@ -92,32 +95,41 @@ export const getBananoAccount = async (seed, id = "0") => {
   console.log(data);
 };
 
-export const getBalance = async (banAddress) => {
+export const getBalance = async (banAddress, profile = false) => {
   try {
-    let accountInfo = await bananojs.getAccountInfo(banAddress);
-    if (
-      accountInfo.error &&
-      accountInfo.error.indexOf("Account not found") !== -1
-    ) {
-      accountInfo = { ...accountInfo, accountFound: false, balance: 0 };
-      return accountInfo;
-    } else {
-      accountInfo = { ...accountInfo, accountFound: true };
-    }
-    let urlLastBlock = `https://creeper.banano.cc/explorer/block/${accountInfo.frontier}`;
-    accountInfo = {
-      ...accountInfo,
-      ...{
-        balance: accountInfo.accountFound
-          ? getAmountPartsFromRaw(accountInfo.balance || 0, "ban_").banano
-          : 0,
+    const data = await fetch(bananoApi, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "accounts_balances",
+        accounts: [banAddress],
+      }),
+      headers: {
+        "Content-Type": "application/json",
       },
-      urlLastBlock,
+      timeout: 30000,
+    });
+    let { balances } = await data.json();
+    balances = {
+      balance: getAmountPartsFromRaw(balances[banAddress].balance || 0, "ban_")
+        .banano,
+      pending: getAmountPartsFromRaw(balances[banAddress].pending || 0, "ban_")
+        .banano,
     };
+    if (profile) {
+      const representative = await bananodeApi.getAccountRepresentative(
+        banAddress
+      );
+      const history = await getAccountHistory(banAddress, -1);
+      balances = { ...balances, ...history };
+      if (representative) {
+        balances = { ...balances, ...history, representative };
+      }
+      console.log(balances);
+    }
 
-    return accountInfo;
-  } catch (e) {
-    console.log(e);
+    return balances;
+  } catch (error) {
+    console.log(error);
   }
 };
 

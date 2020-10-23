@@ -1,8 +1,19 @@
-
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
+import { getBalance } from "service";
+import { useParams } from "react-router-dom";
 
 function Accounts() {
+  const { bananoAddress } = useParams();
+  const [accountUser, setAccountsUser] = useState({});
+  React.useEffect(() => {
+    const getUserAccount = async () => {
+      console.log(bananoAddress);
+      const data = await getBalance(bananoAddress, true);
+      setAccountsUser(data);
+    };
+    getUserAccount();
+  }, [bananoAddress]);
   return (
     <Layout>
       <h1 className='structure--title'>Account Balance</h1>
@@ -10,28 +21,28 @@ function Accounts() {
         <div className='flex flex-col sm:flex-row'>
           <span>
             <img
-              src='https://monkey.banano.cc/api/v1/monkey/ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke?format=png&size=250'
-              className='w-54 mx-auto'
+              src={`https://monkey.banano.cc/api/v1/monkey/${bananoAddress}?format=png&size=250`}
+              className='w-3/4 mx-auto'
               alt='banano-account'
             />
           </span>
           <h1 className='flex sm:w-1/3 text-sm align-center mb-4 sm:mb-0 text-gray-600 items-center break-all'>
-            ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+            {bananoAddress}
           </h1>
         </div>
         <div className='flex flex-row justify-evenly sm:flex-col items-end'>
           <div className='flex flex-col font-thin'>
             <p>Balance:</p>
-            <p className='w-auto align-end'>0 BAN</p>
+            <p className='w-auto align-end'>{accountUser.balance} BAN</p>
           </div>
           <div className='flex flex-col font-thin'>
             <p> Pending:</p>
-            <p className='w-auto align-end'>0 BAN</p>
+            <p className='w-auto align-end'>{accountUser.pending} BAN</p>
           </div>
         </div>
-        <p className='w-auto break-all text-gray-700 text-sm col-span-2'>
+        <p className='w-auto break-all mt-8 text-gray-700 text-sm col-span-2'>
           Representative:
-          ban_1eroshi3kz1ye9o6c6nxqu5zzfhxmc9mqugg9uf8nfk1nw5nnx6q5r66e3ke
+          {accountUser.representative || `No representative chose`}
         </p>
       </div>
       <TableTransactions />
@@ -84,5 +95,3 @@ const TableTransactions = () => {
 };
 
 export default Accounts;
-
-

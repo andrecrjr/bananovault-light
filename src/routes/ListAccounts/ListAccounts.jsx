@@ -40,10 +40,10 @@ export default function ListAccounts() {
                 <tr>
                   <td></td>
                   <td className='text-center text-white uppercase'>Address</td>
-                  <td></td>
-                  <td className='text-right pr-3 text-white py-4 uppercase'>
+                  <td className='text-right pr-1 text-white py-4 uppercase'>
                     Balance
                   </td>
+                  <td></td>
                 </tr>
               </thead>
               <tbody>
