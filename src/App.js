@@ -7,20 +7,22 @@ import Send from "./routes/Send";
 import Settings from "./routes/Settings";
 import { WalletContext, HelperContext } from "./context";
 
-import { WalletReducer, PassReducer, AmountReducer } from "./reducers";
-import { initialWallet, initialPass, initialAmount } from "./reducers";
+import { WalletReducer, PassReducer } from "./reducers";
+import { initialWallet, initialPass } from "./reducers";
 
 function App() {
   const [state, dispatchWallet] = useReducer(WalletReducer, initialWallet);
   const [password, dispatchPass] = useReducer(PassReducer, initialPass);
-  const [amount, dispatchAmount] = useReducer(AmountReducer, initialAmount);
   const addressReduce = (address) => {
     let firstPart = address.substring(0, 11);
     let secondPart = address.substring(55, 64);
     return `${firstPart}...${secondPart}`;
   };
+  React.useEffect(() => {
+    dispatchWallet({ type: "TOTAL_AMOUNT_USER" });
+  }, [dispatchWallet]);
   return (
-    <HelperContext.Provider value={{ addressReduce, dispatchAmount, amount }}>
+    <HelperContext.Provider value={{ addressReduce }}>
       <WalletContext.Provider
         value={{
           state,

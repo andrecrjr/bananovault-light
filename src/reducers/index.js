@@ -4,7 +4,6 @@ export const initialWallet = {
   ...JSON.parse(localStorage.getItem("banWallet")),
   balance: 0,
 };
-export const initialAmount = { value: 0 };
 
 export const initialPass = {
   pass: "",
@@ -15,20 +14,6 @@ export const PassReducer = (state, action) => {
   switch (action.type) {
     case "REPLACE_PASSWORD":
       return { ...state, ...{ pass: action.payload } };
-    default:
-      return state;
-  }
-};
-
-export const AmountReducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_HEADER_PRICE":
-      console.log(state);
-      let updatePrice = parseFloat(state.value) + parseFloat(action.payload);
-      return { value: updatePrice };
-    case "MINUS_HEADER_PRICE":
-      let minosPrice = parseFloat(state.value) - parseFloat(action.payload);
-      return { value: minosPrice };
     default:
       return state;
   }
@@ -75,6 +60,29 @@ export const WalletReducer = (state, action) => {
       }
       localStorage.setItem("banWallet", JSON.stringify({ ...newAddress }));
       return newAddress;
+    case "UPDATE_ACCOUNT":
+      let updateAccount = {
+        ...state,
+        accounts: state.accounts.map((acc) => {
+          if (acc.index === action.payload.index) {
+            return { ...acc, ...action.payload };
+          } else {
+            return { ...acc };
+          }
+        }),
+      };
+      localStorage.setItem("banWallet", JSON.stringify(updateAccount));
+      return updateAccount;
+    case "TOTAL_AMOUNT_USER":
+      let banAmount = state.accounts
+        .map((acc) => acc.banAmount)
+        .filter((acc) => acc !== undefined)
+        .reduce((acc, now) => {
+          return parseFloat(acc) + parseFloat(now);
+        });
+      let updateTotal = { ...state, ...{ amountBananoWallet: banAmount } };
+      localStorage.setItem("banWallet", JSON.stringify(updateTotal));
+      return updateTotal;
     case "UPDATE_PASSWORD":
       let walletEncrypted = updatePassword(state, action);
       return { ...state, ...{ seed: walletEncrypted } };

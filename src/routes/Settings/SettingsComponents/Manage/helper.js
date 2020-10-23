@@ -1,6 +1,6 @@
 import { createNewWallet, createUsingSeed } from "../../../../service";
 import CryptoJS from "crypto-js";
-import { banWallet } from "../UserSettings";
+import { banWallet } from "settings";
 
 export const createUserBan = async (password) => {
   try {

@@ -7,7 +7,6 @@ import Modal from "../modal";
 
 function Header() {
   const { password, dispatchPass, state } = React.useContext(WalletContext);
-  const { amount } = React.useContext(HelperContext);
 
   const [pass, setPass] = React.useState("");
   const [modal, setModal] = React.useState(false);
@@ -31,7 +30,7 @@ function Header() {
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold md:mr-12'>{amount.value} BAN</div>
+        <div className='font-bold md:mr-12'>{state.amountBananoWallet} BAN</div>
         <Menu />
       </div>
       <Modal modal={{ value: modal, setModal }}>

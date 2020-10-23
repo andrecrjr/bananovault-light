@@ -1,21 +1,15 @@
 import React, { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { getBalance } from "service";
-import { HelperContext } from "context";
 import { ReactComponent as Paste } from "assets/paste.svg";
 
 export default function UserAddress({ dispatchWallet, userItem }) {
-  const { dispatchAmount } = useContext(HelperContext);
   const textAreaRef = useRef(null);
 
   const [balance, setBalance] = React.useState(0);
   const removeAdd = (e) => {
     e.preventDefault();
     dispatchWallet({ type: "REMOVE_IN_ACCOUNTS", payload: userItem.index });
-    dispatchAmount({
-      type: "MINUS_HEADER_PRICE",
-      payload: 0,
-    });
   };
 
   React.useEffect(() => {
@@ -28,13 +22,11 @@ export default function UserAddress({ dispatchWallet, userItem }) {
   }, [balance, dispatchWallet, userItem.balance, userItem.banAddress]);
 
   React.useEffect(() => {
-    if (parseFloat(balance) > 0) {
-      dispatchAmount({
-        type: "ADD_HEADER_PRICE",
-        payload: balance,
-      });
-    }
-  }, [balance, dispatchAmount]);
+    dispatchWallet({
+      type: "UPDATE_ACCOUNT",
+      payload: { banAmount: balance, index: parseFloat(userItem.index) },
+    });
+  }, [balance, dispatchWallet, userItem.index]);
   const copyMe = (e) => {
     navigator.clipboard.writeText(textAreaRef.current.textContent);
     /* Alert the copied text */

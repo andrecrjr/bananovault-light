@@ -1,10 +1,10 @@
 export const banWallet = {
-  bananoWallet: {
-    seed: "",
-    mainBanAddress: "",
-    locked: true,
-    type: "seed",
-  },
+  seed: "",
+  locked: true,
+  type: "seed",
+  timer: 10,
+  amountWallet: 0,
+  accounts: [],
 };
 
 export const banSettings = {
