@@ -28,13 +28,22 @@ export const createUsingSeed = async (seed) => {
     const banAddress = bananojs.getAccount(publicKey, "ban_");
     const data = await bananodeApi.getAccountRepresentative(banAddress);
     let representative = await bananodeApi.getAccountRepresentative(banAddress);
+    let accBalance = await getBalance(banAddress);
     console.log(data);
     let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
     return {
       publicKey,
       url,
       seed,
-      accounts: [{ banAddress, index: 0, representative, show: true }],
+      accounts: [
+        {
+          banAddress,
+          index: 0,
+          representative,
+          show: true,
+          banAmount: parseFloat(accBalance["balance"]),
+        },
+      ],
     };
   } catch (error) {
     console.log(error);
@@ -49,7 +58,6 @@ export const openReceive = async (seed, banAddress) => {
       "ban_1sebrep1mbkdtdb39nsouw5wkkk6o497wyrxtdp71sm878fxzo1kwbf9k79b"
     );
     const data = await bananojs.getAccountInfo(banAddress);
-    console.log("account", data);
     //first block done, set representative default
     if (data.block_count === "1") {
       await setRepresentive(seed);

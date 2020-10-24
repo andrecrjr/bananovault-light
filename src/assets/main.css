@@ -607,6 +607,8 @@ video {
 
 .header__menu--item {
   padding-top: 15px;
+  display: block;
+  text-align: center;
   font-size: 0.75rem;
 }
 
@@ -615,7 +617,7 @@ video {
 }
 
 @media screen and (min-width: 768px) {
-  .header__menu--item:not(:first-child) {
+  .header__menu--item {
     padding-left: 0.75rem;
   }
 }

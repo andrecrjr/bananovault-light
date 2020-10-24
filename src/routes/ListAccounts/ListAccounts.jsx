@@ -27,7 +27,7 @@ export default function ListAccounts() {
     <>
       <Layout>
         <h1 className='structure--title mt-2'>Your Accounts</h1>
-        {state ? (
+        {state.seed !== "" ? (
           <section className='structure pt-5'>
             <button
               className='w-7/12 md:w-4/12 block ml-auto mr-3 mb-3 text-2xs button--main'
@@ -60,7 +60,14 @@ export default function ListAccounts() {
                   )}
               </tbody>
             </table>
-            {!state.accounts.some((item) => item.show) && (
+            {state.accounts !== undefined ? (
+              !state.accounts.some((item) => item.show) && (
+                <p class='text-white text-center py-4 px-8'>
+                  No Banano Address here, just tap the New Create Account
+                  button!
+                </p>
+              )
+            ) : (
               <p class='text-white text-center py-4 px-8'>
                 No Banano Address here, just tap the New Create Account button!
               </p>

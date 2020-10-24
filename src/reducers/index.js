@@ -83,7 +83,6 @@ export const WalletReducer = (state, action) => {
             return parseFloat(acc) + parseFloat(now);
           });
       }
-
       let updateTotal = { ...state, ...{ amountBananoWallet: banAmount } };
       localStorage.setItem("banWallet", JSON.stringify(updateTotal));
       return updateTotal;

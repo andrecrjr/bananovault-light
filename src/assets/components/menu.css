@@ -1,5 +1,7 @@
 .header__menu--item {
   padding-top: 15px;
+  display: block;
+  text-align: center;
   @apply text-xs;
 }
 .header__menu--item {
@@ -7,7 +9,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .header__menu--item:not(:first-child) {
+  .header__menu--item {
     @apply pl-3;
   }
 }

@@ -25,7 +25,7 @@ function App() {
     } else {
       localStorage.setItem("banWallet", JSON.stringify(banWallet));
     }
-  }, [dispatchWallet]);
+  }, [dispatchWallet, state.accounts]);
   return (
     <HelperContext.Provider value={{ addressReduce }}>
       <WalletContext.Provider

@@ -1,5 +1,5 @@
 import React from "react";
-import { WalletContext, HelperContext } from "../../context";
+import { WalletContext } from "../../context";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import * as CryptoJS from "crypto-js";
@@ -22,19 +22,17 @@ function Header() {
   };
 
   return (
-    <header className='w-full h-full shadow-xl p-4 text-white'>
-      <div className='flex flex-col h-full px-4 md:flex-row sm:mx-auto justify-center items-center'>
+    <header className='flex w-full h-full shadow-xl p-4 justify-center text-white'>
+      <div className='flex flex-col h-full md:flex-row sm:mx-auto justify-center items-center'>
         <div className='md:absolute md:left-0 md:pl-20'>
           <Link to='/'>[BanVault Light]</Link>
           <button onClick={openModal}>
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold md:mr-12'>
-          {state.amountBananoWallet || 0} BAN
-        </div>
-        <Menu />
+        <div className='font-bold'>{state.amountBananoWallet || 0} BAN</div>
       </div>
+      <Menu />
       <Modal modal={{ value: modal, setModal }}>
         <div className='p-5 bg-dark-gray'>
           <h1 className='structure--title mt-0 p-3'>Wallet Password</h1>
