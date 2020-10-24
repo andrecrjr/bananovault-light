@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { WalletContext } from "context";
 function Main() {
   const { state } = React.useContext(WalletContext);
-console.log(state);
+  console.log(state);
   return (
     <Layout>
       <section className='structure md:mx-auto lg:w-8/12'>
-        {!state &&  (
+        {state.seed === "" && (
           <div className='flex flex-col items-center sm:flex-row'>
             <Link
               to='/settings/wallet'
@@ -22,7 +22,7 @@ console.log(state);
             >
               Importar Wallet
             </Link>
-          </div>       
+          </div>
         )}
         <div className='text-white p-2 mt-4'>
           <h1 className='pb-2'>Why Use BanVault?</h1>

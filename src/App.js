@@ -5,6 +5,7 @@ import AccountRoutes from "./routes/Accounts";
 import ListAccountsRoutes from "./routes/ListAccounts";
 import Send from "./routes/Send";
 import Settings from "./routes/Settings";
+import { banWallet } from "settings";
 import { WalletContext, HelperContext } from "./context";
 
 import { WalletReducer, PassReducer } from "./reducers";
@@ -19,7 +20,11 @@ function App() {
     return `${firstPart}...${secondPart}`;
   };
   React.useEffect(() => {
-    dispatchWallet({ type: "TOTAL_AMOUNT_USER" });
+    if (state.accounts) {
+      dispatchWallet({ type: "TOTAL_AMOUNT_USER" });
+    } else {
+      localStorage.setItem("banWallet", JSON.stringify(banWallet));
+    }
   }, [dispatchWallet]);
   return (
     <HelperContext.Provider value={{ addressReduce }}>

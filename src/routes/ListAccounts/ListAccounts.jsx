@@ -47,7 +47,8 @@ export default function ListAccounts() {
                 </tr>
               </thead>
               <tbody>
-                {state.accounts.length > 0 &&
+                {state.accounts &&
+                  state.accounts.length > 0 &&
                   state.accounts.map((userItem, index) =>
                     userItem.show ? (
                       <UserAddress
@@ -60,7 +61,7 @@ export default function ListAccounts() {
               </tbody>
             </table>
             {!state.accounts.some((item) => item.show) && (
-              <p class='text-white text-center py-4'>
+              <p class='text-white text-center py-4 px-8'>
                 No Banano Address here, just tap the New Create Account button!
               </p>
             )}

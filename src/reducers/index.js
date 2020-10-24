@@ -74,12 +74,16 @@ export const WalletReducer = (state, action) => {
       localStorage.setItem("banWallet", JSON.stringify(updateAccount));
       return updateAccount;
     case "TOTAL_AMOUNT_USER":
-      let banAmount = state.accounts
-        .map((acc) => acc.banAmount)
-        .filter((acc) => acc !== undefined)
-        .reduce((acc, now) => {
-          return parseFloat(acc) + parseFloat(now);
-        });
+      let banAmount = 0;
+      if (state.accounts.length > 0) {
+        banAmount = state.accounts
+          .map((acc) => acc.banAmount)
+          .filter((acc) => acc !== undefined)
+          .reduce((acc, now) => {
+            return parseFloat(acc) + parseFloat(now);
+          });
+      }
+
       let updateTotal = { ...state, ...{ amountBananoWallet: banAmount } };
       localStorage.setItem("banWallet", JSON.stringify(updateTotal));
       return updateTotal;
