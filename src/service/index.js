@@ -50,13 +50,10 @@ export const createUsingSeed = async (seed) => {
   }
 };
 
-export const openReceive = async (seed, banAddress) => {
+export const openReceive = async (seedEncoded, password, banAddress) => {
   try {
-    const pendingBlock = await bananojs.receiveBananoDepositsForSeed(
-      seed,
-      "0",
-      "ban_1sebrep1mbkdtdb39nsouw5wkkk6o497wyrxtdp71sm878fxzo1kwbf9k79b"
-    );
+    let seed = getSeedFromPassword(seedEncoded, password);
+    const pendingBlock = await bananojs.receiveBananoDepositsForSeed(seed, "0");
     const data = await bananojs.getAccountInfo(banAddress);
     //first block done, set representative default
     if (data.block_count === "1") {
@@ -141,8 +138,9 @@ export const getBalance = async (banAddress, profile = false) => {
   }
 };
 
-export const sendBanano = async (amount, destAcc, seed) => {
+export const sendBanano = async (amount, destAcc, seedEncoded, password) => {
   try {
+    let seed = getSeedFromPassword(seedEncoded, password);
     let amountRaw = await bananojs.getRawStrFromBananoStr(amount.toString());
     await bananojs.sendAmountToBananoAccountWithRepresentativeAndPrevious(
       seed,

@@ -17,8 +17,8 @@
   },
   "scripts": {
     "start": "concurrently \"yarn run watch:css\" \"react-scripts start\"",
-    "build": "react-scripts build",
-    "deploy:win": "cd build && surge . banvault.surge.sh",
+    "deploy:win": "cd build && copy index.html 200.html && surge . banvault.surge.sh",
+    "build": "react-scripts build && yarn deploy:win",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
