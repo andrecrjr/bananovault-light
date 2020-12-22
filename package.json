@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "concurrently \"yarn run watch:css\" \"react-scripts start\"",
-    "deploy:win": "cd build && copy index.html 200.html && surge . banvault.surge.sh",
+    "deploy:win": "yarn build && cd build && copy index.html 200.html && surge . banvault.surge.sh",
     "build": "react-scripts build && yarn deploy:win",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
