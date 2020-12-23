@@ -1,8 +1,7 @@
 import { updatePassword } from "./helper";
 
 export const initialWallet = {
-  ...JSON.parse(localStorage.getItem("banWallet")),
-  balance: 0,
+  ...(JSON.parse(localStorage.getItem("banWallet")) || []),
 };
 
 export const initialPass = {
@@ -12,7 +11,7 @@ export const initialPass = {
 
 export const PassReducer = (state, action) => {
   switch (action.type) {
-    case "REPLACE_PASSWORD":
+    case "INPUT_PASSWORD":
       return { ...state, ...{ pass: action.payload } };
     default:
       return state;

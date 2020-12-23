@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { getBalance } from "service";
 import { ReactComponent as Paste } from "assets/paste.svg";

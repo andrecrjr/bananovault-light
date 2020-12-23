@@ -3,7 +3,6 @@ import crypto from "crypto";
 import {
   isSeedValid,
   getAmountPartsFromRaw,
-  getAccount,
 } from "@bananocoin/bananojs/app/scripts/banano-util";
 import { getSeedFromPassword } from "./helper";
 import { getAccountHistory } from "@bananocoin/bananojs/app/scripts/bananode-api";
@@ -24,8 +23,8 @@ export const createNewWallet = async () => {
 export const createUsingSeed = async (seed) => {
   try {
     const privateKey = bananojs.getPrivateKey(seed, 0);
-    const publicKey = bananojs.getPublicKey(privateKey);
-    const banAddress = bananojs.getAccount(publicKey, "ban_");
+    const publicKey = await bananojs.getPublicKey(privateKey);
+    const banAddress = await bananojs.getBananoAccount(publicKey);
     const data = await bananodeApi.getAccountRepresentative(banAddress);
     let representative = await bananodeApi.getAccountRepresentative(banAddress);
     let accBalance = await getBalance(banAddress);

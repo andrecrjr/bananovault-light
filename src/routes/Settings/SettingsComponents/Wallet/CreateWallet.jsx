@@ -1,25 +1,14 @@
 import React from "react";
-import { CreateChangePassword } from "../Manage";
+import { CreateUpdateWallet as CreateNewWallet } from "../Manage/CreateUpdateWalletComponent";
 
-export const CreateWallet = () => {
-  const [stepTwo, setStepTwo] = React.useState(false);
-  const generateWallet = (e) => {
-    e.preventDefault();
-    try {
-      if(!stepTwo){
-      setStepTwo(true);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
+import Modal from "components/modal";
+
+const CreateWallet = () => {
+  const [modal, setModal] = React.useState(false);
 
   return (
     <div className='flex flex-col py-5' id='create-wallet'>
-      <div className={stepTwo ? `block` : `hidden`}>
-        <CreateChangePassword create={true} update={false}  />
-      </div>
-      <div className={stepTwo ? `hidden` : `block`}>
+      <div>
         <h2 className='structure--title my-0'>Create Wallet</h2>
         <p className='p-4 text-white'>
           When you create a new wallet, a new Banano seed will be generated
@@ -33,12 +22,20 @@ export const CreateWallet = () => {
           inside WILL be lost without it! You have been warned!
         </p>
         <button
-          onClick={generateWallet}
+          onClick={(e) => {
+            e.preventDefault();
+            setModal((status) => !status);
+          }}
           className='button--main mx-auto w-4/12 mt-5'
         >
           Create Wallet
         </button>
       </div>
+      <Modal modal={{ value: modal, setModal }}>
+        <CreateNewWallet create={true} update={false} />
+      </Modal>
     </div>
   );
 };
+
+export default CreateWallet;

@@ -60,9 +60,9 @@ const unlockPass = (state, dispatchPass, pass, setPass, setModal) => {
     if (!decryptedSeed || decryptedSeed.length !== 64) {
       return false;
     } else {
-      dispatchPass({ type: "REPLACE_PASSWORD", payload: pass });
+      dispatchPass({ type: "INPUT_PASSWORD", payload: pass });
       setTimeout(() => {
-        dispatchPass({ type: "REPLACE_PASSWORD", payload: "" });
+        dispatchPass({ type: "INPUT_PASSWORD", payload: "" });
         console.log("acabou");
       }, state.timer * 1000);
       setModal(false);

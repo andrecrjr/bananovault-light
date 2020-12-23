@@ -27,48 +27,36 @@ export const importUserBan = async (password, seed) => {
   }
 };
 
-export const validationInputs = async (
+export const createOrImportWallet = async (
   data,
   setData,
-  password,
   dispatchWallet,
-  importWallet = "",
-  create,
-  update
+  importWallet = ""
 ) => {
-  let createOrImportWallet = data.input1 === data.input2 && create;
-  let updatePasswordWallet = data.input1 === data.input2 && update;
+  setData((data) => ({ ...data, ...{ error: false } }));
+  dispatchWallet({
+    type: "UPDATE_WALLET",
+    payload:
+      importWallet.length === 0
+        ? await createUserBan(data.input1)
+        : await importUserBan(data.input1, importWallet),
+  });
+  return true;
+};
 
-  if (createOrImportWallet) {
-    setData((data) => ({ ...data, ...{ error: false } }));
-    dispatchWallet({
-      type: "UPDATE_WALLET",
-      payload:
-        importWallet.length === 0
-          ? await createUserBan(data.input1)
-          : await importUserBan(data.input1, importWallet),
-    });
-    return true;
+export const validatePassword = (password, setData, data, isUpdatePassword) => {
+  let walletIsLocked = password.pass.length === 0;
+  if (isUpdatePassword && walletIsLocked) {
+    setData((oldstate) => ({
+      ...oldstate,
+      ...{
+        error: true,
+        info: "You need to unlock your wallet with the password.",
+      },
+    }));
+    return false;
   }
-
-  if (updatePasswordWallet) {
-    if (password.pass.length === 0) {
-      setData((oldstate) => ({
-        ...oldstate,
-        ...{
-          error: true,
-          info: "You need to unlock your wallet with the password.",
-        },
-      }));
-      return false;
-    }
-    setData((data) => ({ ...data, ...{ error: false } }));
-    dispatchWallet({
-      type: "UPDATE_PASSWORD",
-      payload: { actualValue: password.pass, newValue: data.input1 },
-    });
-    return true;
-  } else {
+  if (data.input1 !== data.input2) {
     setData((data) => ({
       ...data,
       ...{
@@ -78,4 +66,17 @@ export const validationInputs = async (
     }));
     return false;
   }
+  if (data.input1 === data.input2) {
+    setData((data) => ({ ...data, ...{ error: false } }));
+    return true;
+  }
+  return false;
+};
+
+export const updatePassword = (password, dispatchWallet, data) => {
+  dispatchWallet({
+    type: "UPDATE_PASSWORD",
+    payload: { actualValue: password.pass, newValue: data.input1 },
+  });
+  return true;
 };

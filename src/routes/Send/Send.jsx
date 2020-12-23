@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import Layout from "../../components/Layout";
 import { WalletContext, HelperContext } from "context";
-import { useEffect } from "react";
 
 function Send() {
   const { state } = useContext(WalletContext);
@@ -11,9 +10,6 @@ function Send() {
     toAccount: "",
     banAmount: "",
   });
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
 
   return (
     <Layout>
@@ -24,7 +20,7 @@ function Send() {
 
           <select
             name='banano-address'
-            className='w-8/12 h-8 mx-auto rounded-sm  mt-2'
+            className='w-8/12 h-8 mx-auto rounded-sm mt-2'
             id='banano'
             value={input.fromAccount}
             onChange={(e) =>
@@ -50,7 +46,7 @@ function Send() {
             To account:
           </label>
           <input
-            type='text'
+            type='number'
             id='to-account'
             placeholder='Account to send to'
             className='w-8/12 p-2 mx-auto rounded-sm mt-2'
@@ -67,7 +63,7 @@ function Send() {
           <input
             type='number'
             placeholder='Amount of Banano'
-            className='w-full mx-auto p-2 pl-2 h-8 text-md rounded-sm  '
+            className='w-full mx-auto p-2  h-8 text-md rounded-sm  '
             value={input.banAmount}
             onChange={(e) =>
               setInput({

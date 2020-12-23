@@ -7,7 +7,6 @@ import Send from "./routes/Send";
 import Settings from "./routes/Settings";
 import { addressReduce } from "./helper";
 import { WalletContext, HelperContext } from "./context";
-import io from "socket.io-client";
 
 import { WalletReducer, PassReducer } from "./reducers";
 import { initialWallet, initialPass } from "./reducers";
