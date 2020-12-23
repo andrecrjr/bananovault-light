@@ -7,8 +7,8 @@ const CreateWallet = () => {
   const [modal, setModal] = React.useState(false);
 
   return (
-    <div className='flex flex-col py-5' id='create-wallet'>
-      <div>
+    <div className='flex flex-col py-5'>
+      <div className='flex flex-col'>
         <h2 className='structure--title my-0'>Create Wallet</h2>
         <p className='p-4 text-white'>
           When you create a new wallet, a new Banano seed will be generated
@@ -26,7 +26,7 @@ const CreateWallet = () => {
             e.preventDefault();
             setModal((status) => !status);
           }}
-          className='button--main mx-auto w-4/12 mt-5'
+          className='button--main mx-auto mt-5'
         >
           Create Wallet
         </button>

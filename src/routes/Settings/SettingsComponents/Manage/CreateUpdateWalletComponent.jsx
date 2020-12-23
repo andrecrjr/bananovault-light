@@ -45,9 +45,10 @@ export const CreateUpdateWallet = ({ create, update, importWallet }) => {
   };
 
   return (
-    <section className='flex flex-col items-center bg-dark-gray p-5'>
+    <section className={`flex flex-col items-center bg-dark-gray`}>
       <h1 className='structure--title mt-0'>
-        {create ? `Create` : `Update`} Wallet{update && ` Password`}
+        {create ? `Create` : `Update`} Wallet
+        {update && ` Password`}
       </h1>
       {data.error ? <p className='text-white'>{data.info}</p> : null}
       <div className='flex items-center flex-col sm:flex-row sm:justify-center'>
@@ -71,7 +72,7 @@ export const CreateUpdateWallet = ({ create, update, importWallet }) => {
             ? false
             : true
         }
-        className='button--main w-5/12 mt-4'
+        className='button--main mt-4'
       >
         {create ? `Create` : `Update`} {create ? `Wallet` : `Password`}
       </button>

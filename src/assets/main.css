@@ -632,9 +632,8 @@ video {
   transform: translateX(0);
 }
 
-.button--main{
+.button--main {
   padding: 0.5rem;
-  width: 75%;
   font-size: 0.60rem;
   --bg-opacity: 1;
   background-color: #38a169;
@@ -705,6 +704,10 @@ table tbody tr:nth-child(even){
   .structure {
     width: 58.333333%;
   }
+}
+
+input {
+  padding-left: 0.5rem;
 }
 
 ::placeholder {

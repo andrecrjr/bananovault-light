@@ -34,18 +34,25 @@ function Header() {
       </div>
       <Menu />
       <Modal modal={{ value: modal, setModal }}>
-        <div className='p-5 bg-dark-gray'>
-          <h1 className='structure--title mt-0 p-3'>Wallet Password</h1>
-          <input
-            type='password'
-            className='mb-5'
-            onChange={(e) => setPass(e.target.value)}
-            value={pass}
-            placeholder="Wallet's password"
-          />
-          <button onClick={unlock} className='button--main'>
-            Unlock Wallet
-          </button>
+        <div className='bg-dark-gray'>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              unlock();
+            }}
+          >
+            <h1 className='structure--title mt-0 p-3'>Wallet Password</h1>
+            <input
+              type='password'
+              className='mb-5'
+              onChange={(e) => setPass(e.target.value)}
+              value={pass}
+              placeholder="Wallet's password"
+            />
+            <button onClick={unlock} className='button--main'>
+              Unlock Wallet
+            </button>
+          </form>
         </div>
       </Modal>
     </header>
