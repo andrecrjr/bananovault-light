@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { WalletContext } from "context";
 function Main() {
   const { state } = React.useContext(WalletContext);
-  console.log(state);
+
   return (
     <Layout>
       <section className='structure md:mx-auto lg:w-8/12'>

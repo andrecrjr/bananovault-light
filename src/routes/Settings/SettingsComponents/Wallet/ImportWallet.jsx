@@ -22,7 +22,7 @@ const ImportWallet = () => {
           <input
             type='text'
             name='seed'
-            className='w-7/12 md:4/12 pl-2 r'
+            className='md:4/12 pl-2 '
             placeholder='Put your Banano seed'
             onChange={(e) => setSeed(e.target.value)}
             value={seed}

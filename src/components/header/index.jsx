@@ -30,7 +30,7 @@ function Header() {
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold'>{state.amountBananoWallet || 0} BAN</div>
+        <div className='font-bold'>{state.amountBalance || 0} BAN</div>
       </div>
       <Menu />
       <Modal modal={{ value: modal, setModal }}>

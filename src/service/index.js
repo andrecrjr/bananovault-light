@@ -49,20 +49,37 @@ export const createUsingSeed = async (seed) => {
   }
 };
 
-export const openReceive = async (seedEncoded, password, banAddress) => {
+export const openReceive = async (
+  seedEncoded,
+  password,
+  index,
+  rep,
+  banAddress
+) => {
   try {
     let seed = getSeedFromPassword(seedEncoded, password);
-    const pendingBlock = await bananojs.receiveBananoDepositsForSeed(seed, "0");
+    const receives = await bananojs.receiveBananoDepositsForSeed(
+      seed,
+      index.toString(),
+      rep
+    );
     const data = await bananojs.getAccountInfo(banAddress);
     //first block done, set representative default
-    if (data.block_count === "1") {
-      await setRepresentive(seed);
-    }
-    return pendingBlock;
+    // if (data.block_count === "1") {
+    //   await setRepresentive(seed);
+    // }
+    console.log(receives, data);
+    return receives;
   } catch (e) {
     console.log(e);
     return false;
   }
+};
+
+export const getPendings = async (accounts) => {
+  console.log(accounts);
+  const data = await bananojs.getAccountsPending(accounts, -1, true);
+  return data;
 };
 
 export const setRepresentive = async (seed, newRep) => {

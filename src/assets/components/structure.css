@@ -22,7 +22,7 @@
 }
 
 input {
-  @apply pl-2;
+  @apply pl-2 rounded-sm;
 }
 ::placeholder {
   font-size: 0.8em;

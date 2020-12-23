@@ -14,8 +14,12 @@ export default function UserAddress({ dispatchWallet, userItem }) {
 
   React.useEffect(() => {
     async function getBalanceMe() {
-      let account = await getBalance(userItem.banAddress);
-      setBalance(0 || account.balance);
+      try {
+        let account = await getBalance(userItem.banAddress);
+        setBalance(0 || account.balance);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     getBalanceMe();
