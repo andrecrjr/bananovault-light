@@ -6,7 +6,9 @@ import * as CryptoJS from "crypto-js";
 import Modal from "../modal";
 
 function Header() {
-  const { password, dispatchPass, state } = React.useContext(WalletContext);
+  const { password, dispatchPass, state, balances } = React.useContext(
+    WalletContext
+  );
 
   const [pass, setPass] = React.useState("");
   const [modal, setModal] = React.useState(false);
@@ -30,7 +32,9 @@ function Header() {
             {state && `${password.pass.length > 0 ? `🔓` : `🔒`}`}
           </button>
         </div>
-        <div className='font-bold'>{state.amountBalance || 0} BAN</div>
+        <div className='font-bold'>
+          {balances.length > 0 ? balances[1] : 0} BAN
+        </div>
       </div>
       <Menu />
       <Modal modal={{ value: modal, setModal }}>

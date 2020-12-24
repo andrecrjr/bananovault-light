@@ -1,9 +1,6 @@
 import bananojs, { bananodeApi } from "@bananocoin/bananojs";
 import crypto from "crypto";
-import {
-  isSeedValid,
-  getAmountPartsFromRaw,
-} from "@bananocoin/bananojs/app/scripts/banano-util";
+import { isSeedValid } from "@bananocoin/bananojs/app/scripts/banano-util";
 import { getSeedFromPassword } from "./helper";
 import { getAccountHistory } from "@bananocoin/bananojs/app/scripts/bananode-api";
 
@@ -25,10 +22,7 @@ export const createUsingSeed = async (seed) => {
     const privateKey = bananojs.getPrivateKey(seed, 0);
     const publicKey = await bananojs.getPublicKey(privateKey);
     const banAddress = await bananojs.getBananoAccount(publicKey);
-    const data = await bananodeApi.getAccountRepresentative(banAddress);
     let representative = await bananodeApi.getAccountRepresentative(banAddress);
-    let accBalance = await getBalance(banAddress);
-    console.log(data);
     let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
     return {
       publicKey,
@@ -40,7 +34,6 @@ export const createUsingSeed = async (seed) => {
           index: 0,
           representative,
           show: true,
-          banAmount: parseFloat(accBalance["balance"]),
         },
       ],
     };
@@ -77,7 +70,6 @@ export const openReceive = async (
 };
 
 export const getPendings = async (accounts) => {
-  console.log(accounts);
   const data = await bananojs.getAccountsPending(accounts, -1, true);
   return data;
 };
@@ -117,41 +109,32 @@ export const getBananoAccount = async (seed, id = "0") => {
 };
 
 export const getBalance = async (banAddress, profile = false) => {
-  try {
-    const data = await fetch(bananoApi, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "accounts_balances",
-        accounts: [banAddress],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      timeout: 30000,
-    });
-    let { balances } = await data.json();
-    balances = {
-      balance: getAmountPartsFromRaw(balances[banAddress].balance || 0, "ban_")
-        .banano,
-      pending: getAmountPartsFromRaw(balances[banAddress].pending || 0, "ban_")
-        .banano,
-    };
-    if (profile) {
-      const representative = await bananodeApi.getAccountRepresentative(
-        banAddress
-      );
-      const history = await getAccountHistory(banAddress, -1);
-      balances = { ...balances, ...history };
-      if (representative) {
-        balances = { ...balances, ...history, representative };
-      }
-      console.log(balances);
+  const data = await fetch(bananoApi, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "accounts_balances",
+      accounts: profile ? [banAddress] : banAddress,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    timeout: 50000,
+  });
+  let { balances } = await data.json();
+  let newBalance = balances;
+  if (profile) {
+    const representative = await bananodeApi.getAccountRepresentative(
+      banAddress
+    );
+    const history = await getAccountHistory(banAddress, -1);
+    newBalance = { ...newBalance, ...history };
+    if (representative) {
+      newBalance = { ...newBalance, ...history, representative };
     }
-
-    return balances;
-  } catch (error) {
-    console.log(error);
+    console.log(newBalance);
   }
+
+  return newBalance;
 };
 
 export const sendBanano = async (amount, destAcc, seedEncoded, password) => {

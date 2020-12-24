@@ -20,6 +20,5 @@ export const banWallet = {
   locked: true,
   type: "seed",
   timer: 10,
-  amountBalance: 0,
   accounts: [],
 };

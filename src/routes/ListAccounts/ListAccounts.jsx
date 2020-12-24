@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { getBanAddress } from "service";
 
 export default function ListAccounts() {
-  const { state, dispatchWallet, password } = React.useContext(WalletContext);
+  const { state, dispatchWallet, password, balances } = React.useContext(
+    WalletContext
+  );
 
   const createAdd = async (e, index) => {
     e.preventDefault();
@@ -51,11 +53,20 @@ export default function ListAccounts() {
                   state.accounts.length > 0 &&
                   state.accounts.map((userItem, index) =>
                     userItem.show ? (
-                      <UserAddress
-                        userItem={userItem}
-                        dispatchWallet={dispatchWallet}
-                        password={password}
-                      />
+                      <div className='contents' key={index}>
+                        <UserAddress
+                          userAddress={userItem}
+                          dispatchWallet={dispatchWallet}
+                          password={password}
+                          userBalance={
+                            balances.length > 0
+                              ? balances[0].filter(
+                                  (acc) => acc.index === userItem.index
+                                )
+                              : []
+                          }
+                        />
+                      </div>
                     ) : null
                   )}
               </tbody>

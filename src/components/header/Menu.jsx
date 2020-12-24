@@ -11,7 +11,7 @@ export default function Menu() {
       <ul
         className='flex w-2/5 md:w-1/5 flex-col list-none fixed top-0 right-0 bg-dark-gray 
       transform translate-x-full h-screen transition duration-500 z-10
-      text-sm lg:w-auto lg:translate-x-0 lg:flex-row  lg:mt-5 lg:fixed lg:h-auto text-white lg:pr-10'
+      text-sm lg:w-auto lg:translate-x-0 lg:flex-row  lg:mt-5 lg:h-auto text-white lg:pr-10'
       >
         <li className='header__menu--item pt-20 lg:pt-0'>
           <Link to='/accounts'>Accounts</Link>

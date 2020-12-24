@@ -3,10 +3,10 @@ import Layout from "../../components/Layout";
 import { WalletContext, HelperContext } from "context";
 
 function Send() {
-  const { state } = useContext(WalletContext);
+  const { state, balances } = useContext(WalletContext);
   const { addressReduce } = useContext(HelperContext);
   const [input, setInput] = React.useState({
-    fromAccount: "",
+    fromAccount: state.accounts[0].banAddress,
     toAccount: "",
     banAmount: "",
   });
@@ -23,12 +23,13 @@ function Send() {
             className='w-8/12 h-8 mx-auto rounded-sm mt-2'
             id='banano'
             value={input.fromAccount}
-            onChange={(e) =>
+            onChange={(e) => {
+              const { value } = e.target;
               setInput((oldData) => ({
                 ...oldData,
-                ...{ fromAccount: e.target.value },
-              }))
-            }
+                ...{ fromAccount: value },
+              }));
+            }}
           >
             {state.accounts.length > 0 &&
               state.accounts.map(
@@ -37,7 +38,13 @@ function Send() {
                     <option value={address.banAddress} className='text-center'>
                       {addressReduce(address.banAddress)}
                       {""}
-                      {`(${address.banAmount} BAN)`}
+                      {`(${
+                        balances.length > 0
+                          ? balances[0].filter(
+                              (item) => item.index === address.index
+                            )[0].balance
+                          : 0
+                      } BAN)`}
                     </option>
                   )
               )}
@@ -50,12 +57,13 @@ function Send() {
             id='to-account'
             placeholder='Account to send to'
             className='w-8/12 p-2 mx-auto rounded-sm mt-2'
-            onChange={(e) =>
+            onChange={(e) => {
+              const { value } = e.target;
               setInput((oldData) => ({
                 ...oldData,
-                ...{ toAccount: e.target.value },
-              }))
-            }
+                ...{ toAccount: value },
+              }));
+            }}
           />
         </div>
         <label className='pt-3 text-white text-center'>Amount</label>
@@ -72,7 +80,22 @@ function Send() {
               })
             }
           />
-          <span className='absolute top-0 right-0 h-full flex items-center cursor-pointer bg-white pr-1 font-bold my-auto '>
+          <span
+            className='absolute top-0 right-0 h-full flex items-center cursor-pointer bg-white pr-1 font-bold my-auto '
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("estou aqui");
+              if (balances.length > 0) {
+                const data = balances[0].filter(
+                  (acc) => acc.banAddress === input.fromAccount
+                );
+                setInput((oldData) => ({
+                  ...oldData,
+                  ...{ banAmount: data[0].balance },
+                }));
+              }
+            }}
+          >
             Max
           </span>
         </div>

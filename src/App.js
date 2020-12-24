@@ -1,54 +1,46 @@
-import React, { useReducer, useEffect, useCallback, useRef } from "react";
+import React, { useReducer, useEffect, useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainRoute from "./routes/Main";
 import AccountRoutes from "./routes/Accounts";
 import ListAccountsRoutes from "./routes/ListAccounts";
 import Send from "./routes/Send";
 import Settings from "./routes/Settings";
-import { addressReduce } from "./helper";
+import { addressReduce, updateBananoAmounts } from "./helper";
 import { WalletContext, HelperContext } from "./context";
 
 import { WalletReducer, PassReducer } from "./reducers";
 import { initialWallet, initialPass } from "./reducers";
-import { openReceive } from "service";
 
 import { useBananoPending } from "components/hooks/useBananoPending";
+import { useAutoReceive } from "components/hooks/useAutoReceive";
 
 function App() {
   const [state, dispatchWallet] = useReducer(WalletReducer, initialWallet);
   const [password, dispatchPass] = useReducer(PassReducer, initialPass);
+  const [balances, setBalances] = useState([]);
+
   const [pendingBlocks, pendings] = useBananoPending();
-
-  const receivePendings = useCallback(
-    (blocks) => {
-      blocks.map((banAcc) => {
-        if (banAcc[1] !== "") {
-          state.accounts.map(async (acc) => {
-            if (acc.banAddress === banAcc[0] && password.pass !== "") {
-              const wasReceived = await openReceive(
-                state.seed,
-                password.pass,
-                acc.index,
-                acc.representative,
-                acc.banAddress
-              );
-              console.log(wasReceived);
-            }
-          });
-        }
-      });
-    },
-    [password.pass, state]
-  );
-  useEffect(() => {
-    setInterval(
-      () => pendings(JSON.parse(localStorage.getItem("banWallet")).accounts),
-      10000
-    );
-  }, [pendings]);
+  const [, receivePendings] = useAutoReceive(state, password);
 
   useEffect(() => {
-    if (pendingBlocks) receivePendings(pendingBlocks);
+    setInterval(() => {
+      pendings(state !== null ? state.accounts : []);
+    }, 20000);
+  }, [pendings, state]);
+
+  const updateAmounts = useCallback(async () => {
+    setBalances(await updateBananoAmounts(state));
+  }, [state]);
+
+  useEffect(() => {
+    state !== null ? updateAmounts() : setBalances(0);
+  }, [state, updateAmounts]);
+
+  useEffect(() => {
+    console.log(pendingBlocks);
+    if (pendingBlocks) {
+      receivePendings(pendingBlocks);
+    }
   }, [pendingBlocks, receivePendings]);
 
   return (
@@ -59,6 +51,8 @@ function App() {
           dispatchWallet,
           password,
           dispatchPass,
+          pendingBlocks,
+          balances,
         }}
       >
         <Router>
