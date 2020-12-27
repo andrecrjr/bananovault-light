@@ -14,7 +14,6 @@ export const useBananoPending = () => {
           const listAccountPendings = await getPendings(listAccounts);
           if (listAccountPendings) {
             pendingEntries = Object.entries(listAccountPendings.blocks);
-            setPendings(pendingEntries);
           }
         }
         setPendings(pendingEntries);

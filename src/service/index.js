@@ -95,7 +95,10 @@ export const getBanAddress = async (seedEncoded, password, index = "0") => {
     if (isSeedValid(seed)) {
       const banAddress = await bananojs.getBananoAccountFromSeed(seed, index);
       let url = `https://creeper.banano.cc/explorer/account/${banAddress}`;
-      return { banAddress, url, index, show: true };
+      const representative = await bananodeApi.getAccountRepresentative(
+        banAddress
+      );
+      return { banAddress, url, index, show: true, representative };
     }
   } catch (error) {
     console.log(error);

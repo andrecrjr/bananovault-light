@@ -20,7 +20,7 @@ function App() {
   const [balances, setBalances] = useState([]);
 
   const [pendingBlocks, pendings] = useBananoPending();
-  const [, receivePendings] = useAutoReceive(state, password);
+  const [autoReceived, receivePendings] = useAutoReceive(state, password);
 
   useEffect(() => {
     setInterval(() => {
@@ -28,13 +28,15 @@ function App() {
     }, 20000);
   }, [pendings, state]);
 
-  const updateAmounts = useCallback(async () => {
+  const updateHeaderAmount = useCallback(async () => {
     setBalances(await updateBananoAmounts(state));
   }, [state]);
 
   useEffect(() => {
-    state !== null ? updateAmounts() : setBalances(0);
-  }, [state, updateAmounts]);
+    (state !== null && Object.entries(state).length > 0) || autoReceived
+      ? updateHeaderAmount()
+      : setBalances(0);
+  }, [state, updateHeaderAmount, autoReceived]);
 
   useEffect(() => {
     console.log(pendingBlocks);

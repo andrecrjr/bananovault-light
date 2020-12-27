@@ -43,5 +43,6 @@ export const updateBananoAmounts = async (state) => {
 
     return [balances, allBananoAmount];
   }
+
   return false;
 };

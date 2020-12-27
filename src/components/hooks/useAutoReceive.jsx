@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { openReceive } from "service";
+import { bananodeApi } from "@bananocoin/bananojs";
 
 export const useAutoReceive = (state, password) => {
-  const [received, setReceived] = useState({});
+  const [received, setReceived] = useState(false);
   const receivePendings = useCallback(
     (blocks) => {
       if (blocks.length > 0) {
@@ -15,14 +16,15 @@ export const useAutoReceive = (state, password) => {
                     state.seed,
                     password.pass,
                     acc.index,
-                    acc.representative,
+                    (await bananodeApi.getAccountRepresentative(
+                      acc.banAddress
+                    )) || process.env.REACT_ENV_REPRESENTATIVE_DEFAULT,
                     acc.banAddress
                   );
-                  console.log("returned receives!", wasReceived);
                   setReceived(wasReceived);
                 } catch (error) {
                   console.log(error);
-                  return false;
+                  setReceived(false);
                 }
               }
             });
