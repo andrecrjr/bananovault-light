@@ -21,9 +21,12 @@
   }
 }
 
-input {
+input,
+select {
   @apply pl-2 rounded-sm;
+  font-size: 0.8em;
 }
+
 ::placeholder {
   font-size: 0.8em;
 }

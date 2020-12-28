@@ -706,9 +706,11 @@ table tbody tr:nth-child(even){
   }
 }
 
-input {
+input,
+select {
   padding-left: 0.5rem;
   border-radius: 0.125rem;
+  font-size: 0.8em;
 }
 
 ::placeholder {

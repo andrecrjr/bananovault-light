@@ -32,7 +32,7 @@ export default function ListAccounts() {
         {state.seed !== "" ? (
           <section className='structure pt-5'>
             <button
-              className='w-7/12 md:w-4/12 block ml-auto mr-3 mb-3 text-2xs button--main'
+              className='block ml-auto mr-2 mb-3 text-2xs button--main'
               onClick={(e) => createAdd(e)}
             >
               Create New Account

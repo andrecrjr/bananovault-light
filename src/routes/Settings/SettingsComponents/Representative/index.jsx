@@ -80,17 +80,17 @@ export const ChangeRepresentative = ({ accounts }) => {
         Change your representatives
       </h1>
       <section className='sm:w-10/12 mx-auto px-2 flex justify-center items-center flex-col'>
-        <h2 className='text-white mb-3'>Account to change:</h2>
-        <select name='representative-choice' className='w-full h-8  mb-3' id=''>
+        <h2 className='text-white text-xs mb-3'>Account to change:</h2>
+        <select name='representative-choice' className='h-8 mb-3' id=''>
           {accounts.length > 0 &&
             accounts.map((item) => (
               <option key={item.index}>{addressReduce(item.banAddress)}</option>
             ))}
         </select>
-        <h2 className='text-white mb-3'>New Representative:</h2>
+        <h2 className='text-white text-xs mb-3'>New Representative:</h2>
         <input
           type='text'
-          className='w-full h-8'
+          className='h-8'
           placeholder='new Representative address'
         />
         <button className='button--main  sm:w-6/12 mt-4'>

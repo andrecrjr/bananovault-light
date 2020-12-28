@@ -17,6 +17,7 @@ export const updateBananoAmounts = async (state) => {
     );
 
     let data = await getBalance(onlyUserAddress);
+
     const userBalance = onlyActiveAddress.map(async (account) => {
       if (Object.keys(data).length > 0) {
         let userBalance = data[account.banAddress];
@@ -24,6 +25,7 @@ export const updateBananoAmounts = async (state) => {
           typeof userBalance === "undefined"
             ? "0"
             : getAmountPartsFromRaw(userBalance.balance, "ban_").banano;
+
         if (typeof userBalance !== "undefined") {
           totalBananoBalance.push(bananoBalance);
         }
@@ -35,11 +37,15 @@ export const updateBananoAmounts = async (state) => {
         };
       }
     });
+    const balances =
+      userBalance.length > 0 ? await Promise.all(userBalance) : 0;
 
-    const balances = await Promise.all(userBalance);
-    const allBananoAmount = totalBananoBalance.reduce((item, acc) => {
-      return parseFloat(item) + parseFloat(acc);
-    });
+    const allBananoAmount =
+      balances !== 0
+        ? totalBananoBalance.reduce((item, acc) => {
+            return parseFloat(item) + parseFloat(acc);
+          })
+        : 0;
 
     return [balances, allBananoAmount];
   }

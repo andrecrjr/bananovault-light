@@ -33,9 +33,7 @@ function App() {
   }, [state]);
 
   useEffect(() => {
-    (state !== null && Object.entries(state).length > 0) || autoReceived
-      ? updateHeaderAmount()
-      : setBalances(0);
+    state !== null || autoReceived ? updateHeaderAmount() : setBalances(0);
   }, [state, updateHeaderAmount, autoReceived]);
 
   useEffect(() => {
