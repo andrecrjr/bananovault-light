@@ -65,11 +65,9 @@ export const WalletReducer = (state, action) => {
       let updateAccount = {
         ...state,
         accounts: state.accounts.map((acc) => {
-          if (acc.index === action.payload.index) {
-            return { ...acc, ...action.payload };
-          } else {
-            return { ...acc };
-          }
+          return acc.index === action.payload.index
+            ? { ...acc, ...action.payload }
+            : { ...acc };
         }),
       };
       localStorage.setItem("banWallet", JSON.stringify(updateAccount));
