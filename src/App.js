@@ -5,7 +5,7 @@ import AccountRoutes from "./routes/Accounts";
 import ListAccountsRoutes from "./routes/ListAccounts";
 import Send from "./routes/Send";
 import Settings from "./routes/Settings";
-import { addressReduce, updateBananoAmounts } from "./helper";
+import { addressReduce, updateBananoAllAccounts } from "./helper";
 import { WalletContext, HelperContext } from "./context";
 
 import { WalletReducer, PassReducer } from "./reducers";
@@ -29,15 +29,16 @@ function App() {
   }, [pendings, state]);
 
   const updateHeaderAmount = useCallback(async () => {
-    setBalances(await updateBananoAmounts(state));
+    setBalances(await updateBananoAllAccounts(state));
   }, [state]);
 
   useEffect(() => {
-    state !== null || autoReceived ? updateHeaderAmount() : setBalances(0);
+    Object.keys(state).length > 0 || autoReceived
+      ? updateHeaderAmount()
+      : setBalances(0);
   }, [state, updateHeaderAmount, autoReceived]);
 
   useEffect(() => {
-    console.log(pendingBlocks);
     if (pendingBlocks) {
       receivePendings(pendingBlocks);
     }

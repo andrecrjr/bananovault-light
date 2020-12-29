@@ -40,7 +40,10 @@ export const WalletReducer = (state, action) => {
       return removeAddress;
     case "CREATE_NEW_ACCOUNT":
       let newAddress = {};
-      let alreadyInAcc = state.accounts.filter((item) => item.show === false);
+      let alreadyInAcc = state.accounts.filter(
+        (item) =>
+          item.show === false || action.payload.banAddress === item.banAddress
+      );
       if (alreadyInAcc.length === 0) {
         newAddress = {
           ...state,
@@ -50,10 +53,9 @@ export const WalletReducer = (state, action) => {
         newAddress = {
           ...state,
           accounts: state.accounts.map((item) => {
-            if (alreadyInAcc[0].index === item.index) {
-              return { ...item, show: true };
-            }
-            return { ...item };
+            return alreadyInAcc[0].index === item.index
+              ? { ...item, show: true }
+              : { ...item };
           }),
         };
       }
